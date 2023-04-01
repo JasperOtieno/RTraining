@@ -12,5 +12,5 @@ library(gmodels)
 install.packages("table1")
 library(table1)
 
-library(readxl)
+library(readxl) #for importing xls dataset
 
