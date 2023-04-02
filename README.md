@@ -10,5 +10,5 @@ This program installs and loads various packages for use .
 The packages include;tidyverse, haven, magrittr, gmodels, table1, readxl
 
 ## 3. Cleaning program : 
-This program cleans and transforms the STI dataset for analysis.
+This program imports,cleans and transforms the STI dataset for analysis.
 
