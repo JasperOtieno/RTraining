@@ -1,223 +1,268 @@
 #PROGRAM  HEADER ---------------------------------------------------------------
 #SCRIPT TITLE           : IntroToR  
 #PROJECT                : R Training
-#TASK                   : Practise coding basics for Base R programming
+#TASK                   : Introduction to coding basics with Base R programming
 #CREATED BY             : Jasper         
 #DATE CREATED           : 02Apr2023                         
-#DATE LAST MODIFIED     :                                                                                                  
+#DATE LAST MODIFIED     : 15Sept2023                                                                                                
 #LAST MODIFIED BY       :                                                                                                     
 #REASON for MODIFICATION:                                                                                            
 #-------------------------------------------------------------------------------
-# Data types
-## Numeric
 
-data1 <- c(1, 2, 3, 4, 5)
-data2 <- c(1L, 2L, 3L, 4L, 5L)
+# DATA TYPES
 
-class(data1)
-typeof(data2)
+## Numeric : data in form of numbers eg 12, 3, 3.4 
+numeric1 <- c(1, 2, 3, 4, 5)
+numeric2 <- c(1L, 2L, 3L, 4L, 5L)
+class(numeric1)
+typeof(numeric2)
 
-## Character
+## Integer: type in form of whole numbers only
+numeric3 <- c(1L, 3L,5L)
+typeof(numeric3)
 
-data3 <- c("ann", "erick", "", "l")
-class(data3)
-typeof(data3)
+## Character: type in form of letters or sentences. Must always be in double quotations marks
+char1 <- c("ann", "erick", "", "l")
+class(char1)
+typeof(char1)
 
-## Factor
-data4 <- factor("Primary", "Secondary", "University")
-class(data4)
+## Factor : type of data that store ordinal/categorical data points
+fact1 <- factor("Primary", "Secondary", "University")
+class(fact1)
+typeof(fact1)
 
-# data5 <- as.factor(data4, labels = c("Primary", "Secondary", "University"),
-#                 values = c(1, 2, 3))
+##Assigning values to factor data types
+?factor
+
+fact2 <- as.factor(fact1, 
+                   levels = c("Primary", "Secondary", "University"),
+                   labels = c("Primary", "Secondary", "University"), 
+                   values = c(1, 2, 3)) #has an error. to investigate cause of error
 
 # Type conversion
-data6 <- as.character(data1)
-data7 <- as.numeric(data6)
-data8 <- as.numeric(data3)
+data6 <- as.character(numeric1) #converting numeric to character
+data7 <- as.numeric(data6) #converting character to numeric
+data8 <- as.numeric(numeric3) #converting integer to numeric
 
-# date types
-data9 <- Sys.time()
-data9
+class(data6)
+typeof(data6)
 
-data10 <- Sys.Date()
-data10
+class(data7)
+typeof(data7)
 
-class(data10)
-typeof(data10)
+class(data8)
+typeof(data8)
 
-data10
-data10 - 35
+# dates and times types
+date1 <- Sys.time()
+date1
+class(date1)
+typeof(date1)
 
+date2 <- Sys.Date()
+date2
 
-# Objects
-## Vectors
-data1 <- c(1, 3, 5, 68, 0)
-data2 <- 1:10
-data3 <- c(1:10, 15, 17, 21)
-data4 <- 25:0
-data5 <- 0:30
-data5a <- 2.5:7.5
+class(date2)
+typeof(date2)
 
-data5[25]
-data5[26]
+#calculation using dates
 
-data5 * 2
+date2
+date2 - 35
 
-data5 - 10
+# DATA STRUCTURES
 
-data5 / 10
+## 1. Vectors : One dimensional collection of data types. placeholder for one type of data
 
-data5^5
+vect1 <- c(1, 3, 5, 68, 0) #vector of specified numeric data
+vect1
 
-sqrt(data5)
+vect2 <- 1:10 #vector of sequential numbers 1 to 10 
+vect2
 
-sqrt(data5[31])
+vect3 <- c(1:10, 15, 17, 21) #vector of 1 to 10 then 15 17 21
+vect3
 
-data6 <- seq(from = 1, 
+vect4 <- 25:0 #vector of numbers decreasing from 25 to 0
+vect4
+
+vect5 <- 0:30 #vector of numbers increasing from 0 to 30
+vect5
+
+vect6 <- 2.5:7.5
+vect6
+
+#NOTE: the default constant by which vector increases or decreases is 1
+
+# getting the element at a position in a vector
+
+vect5[25] #element at position 25, use square bracket to indicate position
+vect5[26] #element at position 25, use square bracket to indicate position
+
+# Calculations using vectors
+
+vect5 * 2 #each element in the vector is multiplied by 2
+
+vect5 - 10 # 10 is subtracted from each of the elements
+
+vect5 / 5 # each element of vect5 is divided by 5
+
+vect5^5 #each element is raised to the power of 5
+
+sqrt(vect5) # outputs square root of each element of vector5
+
+sqrt(vect5[31]) #outputs sqrt of element at position 31 of vect5
+
+#Forming sequential numbers
+
+vect7 <- seq(from = 1, 
              to = 25, 
-             by = 2)
-data6
+             by = 2) #creates sequence of numbers between 1 and 25 increasing by 2
+vect7
 
-data7 <- seq(from = 1, 
+vect8 <- seq(from = 1, 
              to = 25, 
-             length.out = 50)
+             length.out = 50) # creates a vector of length 50 (50 elements) from 1 to 25
+vect8
 
-data5 <- 0:30
-length(data5)
+vect9 <- 0:30
+length(vect9) # function length before a vector object outputs vector length 
 
+class(vect3)
 
-data3 <- c(1:10, 15, 17, 21)
-class(data3)
-
-data4 <- c("Primary", "Secondary", "University")
-class(data4)
-
+class(vect4)
 
 data5 <- c(1, 2, 3, "Secondary", "University")
 class(data5)
 
 as.numeric(data5)
 
-## Data frames
-df1 <- data.frame(col1 = c(1, 2, 3, 4, 5),
-                  col2 = c("ann", "john", "erick", "james", "june"))
+## 2. Data frames : multidimensional collection of different data types. 
+                  #use function data.frame to assign object as a data frame
+                  #columns must have equal number of rows
 
+(df1 <- data.frame(col1 = c(1, 2, 3, 4, 5,7),
+                  col2 = c("ann", "john", "erick", "james", "june", "Jasper")))
 
 class(df1)
 typeof(df1)
 
-df1[2, 2]
-df1[4, 2]
+df1[2, 2] #outputs element at row2, column2 from data frame 1=john
+df1[6, 2]  #outputs element at row6, column 2 =jasper
 
-df1$col2
+df1$col2 #outputs all elements of column2 , $reference the column 
 
-df1$col2[5]
+df1$col2[5] #outputs the element at position 5 of column 2=june
 
-df1$col3 <- df1$col1*4
-df1$col4 <- df1$col1/3
-df1$col5 <- round(df1$col4, signif())
-df1$col6 <- signif(df1$col4, 3)
+(df1$col3 <- df1$col1*4) #multiplies each element in column 1 by 4 and assigns them to column 3 of the same data frame
+df1
 
-df1[, "col4"]
-df1[, 4]
+(df1$col4 <- df1$col1/3)
 
-df1[3, ]
-df1[, 3]
+(df1$col5 <- round(df1$col4, 3)) #rounds off col4 to 4 d.p
 
-df1[df1$col3 < 12, ]
-df1[df1$col5 == 1, ]
-df1[df1$col2 == "john", ]
-df1[df1$col6 > 1, ]
+(df1$col6 <- signif(df1$col4, 3))
+
+df1[, "col4"] #display all elements in col4-col name
+df1[, 4] #display all elements in col4-col number
+
+df1[3, ] #display all elements in row3 -row number
+
+df1
+
+df1[df1$col3 < 12, ] #display rows with col3 less than 12
+df1[df1$col5 == 1, ] #display rows with col5 equals 1
+df1[df1$col2 == "john", ] #display rows with col2 containing john
+df1[df1$col6 > 1, ] #display rows with col6 greater than 1
 
 
-df8 <- data.frame(
+(df2 <- data.frame(
   var1 = 1:15,
   var2 = 16:30
-)
+))
 
-df9 <- data.frame(
+(df3 <- data.frame(
   var3 = 1:15,
   var4 = 16:30
-)
+))
 
 
-df11 <- data.frame(
+(df4 <- data.frame(
   var1 = 16:30,
   var2 = 31:45
-)
+))
 
-df10 <- cbind(df8, df9)
-df12 <- rbind(df8, df11)
+(df5 <- cbind(df2, df3)) #join two data frames row wise. Must have equal number of rows
+(df6 <- rbind(df2, df4)) #appends a data frame to another, col names must be similar
 
-df8 <- data.frame(
+(df2 <- data.frame(
   var1 = 1:15,
   var2 = 16:30
-)
+))
 
-df8$var3 <- paste(df8$var1, df8$var2)
-df8$var4 <- paste0(df8$var1, "-", df8$var2)
+(df2$var3 <- paste(df2$var1, df2$var2)) #concatenates var1 and var2 with space in bewtween
+(df2$var4 <- paste0(df2$var1, "-", df2$var2)) #concatenates var1 and var2 with a hyphen and no space bewtween
 
+df2
 
 attach(df1)
 detach(df1)
 
-# Lists 
+?attach
 
+## 3. Lists 
 
-list1 <- list(
+(list1 <- list(
   var1 = 1:20,
   var2 = rep(c("A", "B"), 10)
-)
+))
 
-
-list1
 
 list1$var2[6]
 
 list1[1]
 
 list1[[1]][6]
+list1$var1[6]
 
-list2 <- list(
+(list2 <- list(
   list1 = list(var1 = 1:20,
                var2 = rep(c("A", "B"), 10)),
   var3 = rep(c("A", "B"), 10)
-)
-
-list2
+))
 
 str(list2)  # look at the structure
 
-list2$list1$var2[1]
-
+list2$list1$var1[1]
 list2[[1]][1]
+
+list2$list1$var2[1]
 list2[[2]][1]
 
 
-list_all <- list(
+(list_all <- list(
   df1 = list(var1 = 1:20,
              var2 = rep(c("A", "B"), 10)),
   df2 = list(var3 = 1:20,
              var4 = rep(c("A", "B"), 10))
-)
+))
 
 # convert list to dataframe
-list_all1 <- do.call(list_all)
-
-
+(list_all1 <- do.call(list_all)) #investigate
 
 
 # Accessing elements in objects
 
 # Missing data
 # Numeric Missing data
-df1 <- data.frame(
+(df1 <- data.frame(
   var1 = c(1:12, NA, NA, NA),
   var2 = 16:30,
   var3 = c(rep("", 5), rep(c("A", "B"), 5))
-)
+))
 
 # check if col has missing numeric values
+
 is.na(df1$var1)
 
 !is.na(df1$var1)
@@ -232,32 +277,19 @@ df1[!is.na(df1$var1), ]
 mean(df1$var1, na.rm = TRUE)
 
 # Character Missing data
+
 df1[df1$var3 != "", ]
 
-
-df1$var3 <- ifelse(df1$var3 == "", "M", df1$var3)
-df1$var4 <- ifelse(df1$var3 == "", "M", df1$var3)
-
+(df1$var3 <- ifelse(df1$var3 == "", "M", df1$var3))
+(df1$var4 <- ifelse(df1$var3 == "", "M", df1$var3)) #creates a new variable, col4
 
 df1[df1$var3 == "", ]
 
-# df1[df1$var3 == "", ] <- "M"
+df1
 
-df1$var3[df1$var3 == ""] <- "M"
+## 4. Matrices
 
 # Importing data
-## Modern R (Packages)
-
-
-
-
-
-
-
-
-
-
-
 
 
 # END OF PROGRAM ---------------------------------------------------------------
