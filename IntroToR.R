@@ -115,18 +115,16 @@ sqrt(vect5[31]) #outputs sqrt of element at position 31 of vect5
 
 #Forming sequential numbers
 
-vect7 <- seq(from = 1, 
+(vect7 <- seq(from = 1, 
              to = 25, 
-             by = 2) #creates sequence of numbers between 1 and 25 increasing by 2
-vect7
+             by = 2)) #creates sequence of numbers between 1 and 25 increasing by 2
 
-vect8 <- seq(from = 1, 
+(vect8 <- seq(from = 1, 
              to = 25, 
-             length.out = 50) # creates a vector of length 50 (50 elements) from 1 to 25
-vect8
+             length.out = 50)) # creates a vector of length 50 (50 elements) from 1 to 25
 
-vect9 <- 0:30
-length(vect9) # function length before a vector object outputs vector length 
+(vect9 <- 0:30)
+(length(vect9)) # function length before a vector object outputs vector length 
 
 class(vect3)
 
