@@ -12,3 +12,6 @@ Example of the packages include;tidyverse, haven, magrittr, gmodels, table1, rea
 ## 3. Cleaning program : 
 This program describes how to import ,clean and transform data using the STI dataset for analysis.
 
+## 4. Importing datasets program : 
+This program describes how to import various types of dataset formats into R environment.
+
