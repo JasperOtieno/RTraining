@@ -438,6 +438,11 @@ A[1,,1] #returns first row of first level
 A[1,,2] #returns first row of second level
 ```
 
+
+# Functions and Loops
+## Creating a function
+## Function Iteration
+
 # Package installation
 ## Setting work directory
 ## Installing and loading a package
@@ -479,10 +484,6 @@ library(magrittr) #for piping i.e %>%
 ## Barcharts
 ## Heat maps
 ## Bubble graphs
-
-# Functions and Loops
-## Creating a function
-## Function Iteration
 
 # R Shiny
 ## Building and interactive dashboard
