@@ -1,4 +1,4 @@
-# R Training
+# Rmarkdown Program (LearningR)
 This is an introductory course to R training project.
 The program is written in RMarkdown for reporting and visualization of outputs in either pdf or html documents and ease of sharing with others for review, reproducibility, accountability, creating tutorials and for learning. There are various sections of the document created for completion of specific tasks during this training.
 
