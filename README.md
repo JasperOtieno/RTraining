@@ -8,22 +8,23 @@ This  introduces the coding basics for learning R programming. It describes the 
 ## 2. Data structures: 
 This  section introduces the coding basics for learning R programming. It describes the different types of data structures.
 
-## 3. Package Installation: 
+## 3. Functions and Loops
+Describes how functions and loops used in R programming.
+
+## 4. Package Installation: 
 This  section describes different kinds of packages and how to make them available for use to complete a specific task.
 
-## 4. Reading and writing datasets: 
+## 5. Reading and writing datasets: 
 This program describes how to import various types of dataset formats into R environment.
 
-## 5. Data Wrangling: 
+## 6. Data Wrangling: 
 This section describes how to manipulate data; clean and transform data using the STI dataset for analysis.
 
-## 6. Exploratory Data Analysis: 
+## 7. Exploratory Data Analysis: 
 Describes analysis of univariate and multivariate data
 
-## 7. Data Visualization:
+## 8. Data Visualization:
 Section describes how to visualize data using different methods
-
-## 8. Functions and Loops
 
 ## 9. R Shiny
 
