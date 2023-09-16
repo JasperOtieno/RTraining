@@ -332,4 +332,39 @@ df1[, 4] #display all elements in col4-col number
 (df2$var4 <- paste0(df2$var1, "-", df2$var2)) #concatenates var1 and var2 with a hyphen and no space between
 ```
 
+## Matrices
+
+### Creating a matrix
+### Retreiving elements of a matrix
+### Combining matrices
+
+
+## Arrays
+### Creating an array
+### Retreiving elements of an array
+
+
+# Package installation
+## Setting work directory
+## Installing and loading a package
+
+# Reading and writing datasets
+## Reading and writing CSV files
+## Reading and writing txt files
+## Reading and writing SAS files 
+## Reading and writing STATA files .dta
+
+# Data Wrangling
+
+# Exploratory Data Analysis
+## Univariate data analysis
+## Multivariate Data analysis
+
+# Data Visualisation
+## Boxplots
+## Piecharts
+## Histograms
+## Barcharts
+## Heat maps
+## Bubble graphs
 
