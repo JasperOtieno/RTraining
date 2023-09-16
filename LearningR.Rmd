@@ -7,6 +7,7 @@ output:
     toc: yes
     number_sections: yes
     theme: readable
+    fig_caption: yes
 editor_options: 
   chunk_output_type: console
 ---
@@ -334,7 +335,6 @@ df1[, 4] #display all elements in col4-col number
 ```
 
 ## Matrices
-
 ### Creating a matrix
 ### Retreiving elements of a matrix
 ### Combining matrices
