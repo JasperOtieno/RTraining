@@ -1,7 +1,7 @@
 ---
 title: "Introduction to R Programming"
 author: "Jasper Otieno"
-date: ' Sys.date()'
+date: "Created on 15/Sept/2023"
 output:
   html_document:
     toc: yes
@@ -15,12 +15,14 @@ editor_options:
 ---
 _______________________________________________________________________________
                                                  
-This is an introduction to R programming with end goal of learning the basics of R and finally being able to program in R.
+This is an introduction to R programming with end goal of learning the basics of R and finally being able to program in R and proceed to advanced programming.
 
-# DATA TYPES
+# BASIC R PROGRAMMING
+
+## DATA TYPES
 R stores data in different types or classes. There are about 4 classes/types of data that R can store. To check the kind of class of data you are working with, use the function `class()` and use the function `typeof()` to check the type of data.
 
-## Character
+### Character
 Refers to data in form of letters, sentences or numbers formatted to texts/strings e.g, names of people (james, rose), letter A, B, or colours, green, blue. They must always be wrapped in double quotation marks when referenced.
 
 ```{r}
@@ -29,7 +31,7 @@ class(char1)
 typeof(char1)
 ```
 
-## Numeric
+### Numeric
 Are class of data that are stored in number formats. These include whole numbers, decimals or even dates. There are various types of numeric data which include integers, double or just numeric.
 
 ```{r}
@@ -40,7 +42,7 @@ typeof(numeric1)
 
 ```
 
-## Integers
+### Integers
 Are numeric data in form of whole numbers. They are denoted by letter L next to them.
 ```{r}
 (numeric2 <- c(1L, 2L, 3L, 4L, 5L)) #integer (whole numbers)
@@ -49,7 +51,7 @@ class(numeric2)
 typeof(numeric2)
 ```
 
-## Factor
+### Factor
 Refers to class of data that stores data in categorical format. They values take whole numbers hence are integer type.
 
 ```{r factors, include=FALSE}
@@ -68,7 +70,7 @@ typeof(fact1)
 (fact3 <- factor(fact1))
 ```
 
-## Logical
+### Logical
 These are data types that take the values TRUE or FALSE. They are special kind of numeric data that indicates if a condition is true or not.
 
 ```{r}
@@ -78,7 +80,7 @@ class(lg1)
 typeof(lg1)
 ```
 
-## Dates and Times
+### Dates and Times
 Data can be stored in form of dates or times. They are special kind of numeric data of type double.
 
 ```{r}
@@ -95,7 +97,7 @@ class(date2)
 typeof(date2)
 ```
 
-## Data Type Conversion
+### Data Type Conversion
 Data can be converted from one type to another depending on need of analysis or for storage.
 
 ```{r}
@@ -118,10 +120,10 @@ class(data8)
 typeof(data8)
 ```
 
-# DATA STRUCTURES
+## DATA STRUCTURES
 These are ways of organising data for ease of analysis or storage. There are 4 ways that data can be organised in R. To know the structure of your data, use the function `str()`.
 
-## Vectors
+### Vectors
 Are the smallest or easiest way of organising data. They are as simple as just one character or letter. Vectors are single dimensional and homogeneous (only stores one type of data).
 
 ```{r}
@@ -153,7 +155,7 @@ str(vect8)
 
 ```
 
-### Forming sequence of numbers
+#### Forming sequence of numbers
 ```{r}
 (vect9 <- seq(from = 1, 
              to = 25, 
@@ -167,7 +169,7 @@ str(vect8)
 (length(vect11)) # function length before a vector object outputs vector length 
 ```
 
-### Calculations using vectors
+#### Calculations using vectors
 
 ```{r}
 vect4 * 2 #each element in the vector is multiplied by 2
@@ -183,7 +185,7 @@ sqrt(vect4) #outputs square root of each element of vector4
 sqrt(vect4[31]) #outputs sqrt of element at position 31 of vect4
 ```
 
-### Retrieving vector elements
+#### Retrieving vector elements
 Square brackets [] are used to index the position of elements in any data structure, vectors included. Lowest index of an element is 1 and not 0.
 
 ```{r}
@@ -194,7 +196,7 @@ vect4[26] #retrieves element at position 26 in vector 4
 vect4[62] #retrieves element at position 26 in vector 4
 ```
 
-### Converting vectors from one type to another
+#### Converting vectors from one type to another
 ```{r}
 (data5 <- c(1, 2, 3, "Secondary", "University"))
 class(data5) #character vector
@@ -209,11 +211,11 @@ class(data6) #numeric vector
 class(y)
 ```
 
-## Matrices
+### Matrices
 These are similar to vectors however they are bi dimensional. The data is organised into rows and columns. Columns are clearly defined. Is combination of multiple vectors. Use the function `matrix()` to assign an object a matrix.
 Numeric matrices can be used to quickly carry out summaries. By default, matrix arranges the elements by the columns, that is the elements increasing from column to column. This can be changed using the `byrow=TRUE` argument. Matrices are homogeneous.
 
-### Creating a matrix
+#### Creating a matrix
 
 ```{r creatmtx}
 (mtx1 <- matrix(c(1:9), nrow=3, ncol=3))
@@ -222,7 +224,7 @@ Numeric matrices can be used to quickly carry out summaries. By default, matrix 
 (mtx2 <- matrix(c(1:9), nrow=3, ncol=3, byrow = TRUE))
 ```
 
-### Retreiving elements of a matrix
+#### Retreiving elements of a matrix
 ```{r matrixs}
 mtx1
 mtx1[2,2] #pulls the element at row2 in column2
@@ -236,7 +238,7 @@ mtx2[,c(2,3)] #returns column 2 and 3
 mtx2[,1:3] #returns column 2 to 3
 ```
 
-### Calculations using matrices
+#### Calculations using matrices
 ```{r calcmtx}
 #summary
 summary(mtx1)
@@ -253,11 +255,11 @@ apply (mtx3,1,function(x)mean(x[x>0])) #mean of rows of only positive numbers
 
 ```
 
-## Lists
+### Lists
 Is one dimensional structures that can hold different types. It's heterogeneous
 Use the function `list()` to create a list. It's like a bucket of different items put together.
 
-### Creating lists
+#### Creating lists
 ```{r}
 (list0 <- c("look", 1, TRUE, FALSE)) #holds anything parsed to it
 
@@ -268,7 +270,7 @@ Use the function `list()` to create a list. It's like a bucket of different item
 
 ```
 
-### Retreiving elements of a list
+#### Retreiving elements of a list
 ```{r}
 list1$var2[6]
 
@@ -304,16 +306,16 @@ list2[[2]][1]
 
 ```
 
-### convert list to dataframe
+#### convert list to dataframe
 
 ```{r}
 #(list_all1 <- do.call(list_all)) #investigate
 ```
 
-## Data Frames
+### Data Frames
 These are multidimensional collection of different data types. They are created using the  function `data.frame()` to assign object as a data frame. They are considered a collection of different types of vectors. Each of the columns is a vector and stores only one type of data. Has unlimited number of rows and columns. Most of the data collected and used are organised in data frames. To reference a column, use `$` symbol and `[]` for indexing the elements.
 
-### Creating a data frame
+#### Creating a data frame
 
 ```{r}
 (df1 <- data.frame(col1 = c(1, 2, 3, 4, 5,7),
@@ -324,7 +326,7 @@ typeof(df1)
 str(df1)
 ```
 
-### Create data frames from different vectors
+#### Create data frames from different vectors
 ```{r}
 (fname <- c("Ken", "Cate", "Amalia", "Jimmy", "dorcas")) #character vector
 (score <- c(34, 67, 90, 200, 20)) #numeric vector
@@ -338,7 +340,7 @@ str(df1)
 str(df)
 ```
 
-### Retreiving elements of a data frame
+#### Retreiving elements of a data frame
 
 ```{r}
 df1[2, 2] #outputs element at row2, column2 from data frame 1=john
@@ -357,7 +359,7 @@ df1[df1$col2 == "john", ] #display rows with col2 containing john
 df1[df1$col6 > 1, ] #display rows with col6 greater than 1
 ```
 
-### Calculations using elements of a data frame
+#### Calculations using elements of a data frame
 
 ```{r}
 (df1$col3 <- df1$col1*4) #multiplies each element in column 1 by 4 and assigns them to column 3 of the same data frame
@@ -373,7 +375,7 @@ df1[, 4] #display all elements in col4-col number
 
 ```
 
-### Combining data frames
+#### Combining data frames
 
 ```{r}
 (df2 <- data.frame(
@@ -404,11 +406,11 @@ df1[, 4] #display all elements in col4-col number
 (df2$var4 <- paste0(df2$var1, "-", df2$var2)) #concatenates var1 and var2 with a hyphen and no space between
 ```
 
-## Arrays
+### Arrays
 Are multidimensional. Can be more than 2 dimensions. Can be considered super set of matrices. Are homogeneous. Can be created by combining matrices. You cannot view an array in one go but can access the levels of the arrays (each of the matrices combined). Useful when stacking matrices on top of each other.
 Arrays cannot be used to perform calculations but to store multiple matrices.
 
-### Creating an array
+#### Creating an array
 ```{r}
 v1 =c(1:12)
 (m1 = matrix(v1, nrow=3, ncol=4, byrow=TRUE))
@@ -419,33 +421,32 @@ v2 = c(25:36)
 (A = array(c(m1,m2), dim=c(3,4,2)))# 3=rows, 4=columns, 2=number of matrices/levels in the array
 ```
 
-### Retreiving levels of an array
+#### Retreiving levels of an array
 ```{r}
 A[,,1] #level 1
 A[,,2] #level 2
 ```
 
-### Defining array rows and columns
+#### Defining array rows and columns
 ```{r}
 names <- c("jimmy","july", "feb") #row names
 info <- c("Height", "Weight", "Hair colour", "skin colour") #column names
 (A = array(c(m1,m2), dim=c(3,4,2), dimnames= list(names, info)))
 ```
 
-### Retreiving values of an array from different levels
+#### Retreiving values of an array from different levels
 ```{r}
 A[1,,1] #returns first row of first level
 A[1,,2] #returns first row of second level
 ```
 
+## Functions and Loops
+### Creating a function
+### Function Iteration
 
-# Functions and Loops
-## Creating a function
-## Function Iteration
-
-# Package installation
-## Setting work directory
-## Installing and loading a package
+## Package installation
+### Setting work directory
+### Installing and loading a package
 
 ```{r}
 library(tidyverse) #contains dplyr,ggplot2, lubridate, tidyr, tibble, stringr, readr, for data cleaning, manipulation, transformation, visualization
@@ -464,28 +465,30 @@ library(magrittr) #for piping i.e %>%
 
 ```
 
-# Reading and writing datasets
-## Reading and writing CSV files (.csv)
-## Reading and writing excel files (.xls/.xlsx)
-## Reading and writing txt files (.txt/.doc)
-## Reading and writing SAS files 
-## Reading and writing STATA files .dta
+## Reading and writing datasets
+### Reading and writing CSV files (.csv)
+### Reading and writing excel files (.xls/.xlsx)
+### Reading and writing txt files (.txt/.doc)
+### Reading and writing SAS files 
+### Reading and writing STATA files .dta
+### Reading tables/databases
 
-# Data Wrangling
+## Data Wrangling
 
-# Exploratory Data Analysis
-## Univariate data analysis
-## Multivariate Data analysis
+## Exploratory Data Analysis
+### Univariate data analysis
+### Multivariate Data analysis
 
-# Data Visualisation
-## Boxplots
-## Piecharts
-## Histograms
-## Barcharts
-## Heat maps
-## Bubble graphs
+## Data Visualisation
+### Boxplots
+### Piecharts
+### Histograms
+### Barcharts
+### Heat maps
+### Bubble graphs
 
-# R Shiny
-## Building and interactive dashboard
-## Developing an RShiny Web App
+## R Shiny
+### Building and interactive dashboard
+### Developing an RShiny Web App
 
+# ADVANCED PROGRAMMING
