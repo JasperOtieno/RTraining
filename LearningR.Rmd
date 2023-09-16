@@ -6,11 +6,330 @@ output:
   html_document: 
     toc: yes
     number_sections: yes
+    theme: readable
 editor_options: 
   chunk_output_type: console
 ---
-
+_______________________________________________________________________________
+                                                 
 This is an introduction to R programming with end goal of learning the basics of R and finally being able to program in R.
 
 # DATA TYPES
-R stores data in different types or classes. There are about 4 classes/types of data that R can store
+R stores data in different types or classes. There are about 4 classes/types of data that R can store. To check the kind of class of data you are working with, use the function `class()` and use the function `typeof()` to check the type of data.
+
+## Character
+Refers to data in form of letters, sentences or numbers formatted to texts/strings e.g, names of people (james, rose), letter A, B, or colours, green, blue. They must always be wrapped in double quotation marks when referenced.
+
+```{r}
+(char1 <- c("ann", "erick", "", "l"))
+class(char1)
+typeof(char1)
+```
+
+## Numeric
+Are class of data that are stored in number formats. These include whole numbers, decimals or even dates. There are various types of numeric data which include integers, double or just numeric.
+
+```{r}
+(numeric1 <- c(1, 2, 3, 4, 5, 6.5)) #double
+
+class(numeric1)
+typeof(numeric1)
+
+```
+
+## Integers
+Are numeric data in form of whole numbers. They are denoted by letter L next to them.
+```{r}
+(numeric2 <- c(1L, 2L, 3L, 4L, 5L)) #integer (whole numbers)
+
+class(numeric2)
+typeof(numeric2)
+```
+
+## Factor
+Refers to class of data that stores data in categorical format. They values take whole numbers hence are integer type.
+
+```{r}
+(fact1 <- factor("Primary", "Secondary", "University")) #not sure why Levels: University is in the output
+
+class(fact1)
+typeof(fact1)
+
+#Assigning values to factors
+#fact2 <- as.factor(fact1, 
+#                   levels = c("Primary", "Secondary", "University"),
+#                   labels = c("Primary", "Secondary", "University"), 
+#                   values = c(1, 2, 3)) #has an error. to investigate cause of error
+#Error in as.factor(fact1, levels = c("Primary", "Secondary", "University"),  : 
+# unused arguments (levels = c("Primary", "Secondary", "University"), labels = #c("Primary", "Secondary", "University"), values = c(1, 2, 3))
+
+```
+
+## Logical
+These are data types that take the values TRUE or FALSE. They are special kind of numeric data that indicates if a condition is true or not.
+
+```{r}
+(lg1 <- c(TRUE, FALSE, FALSE, TRUE))
+
+class(lg1)
+typeof(lg1)
+```
+
+## Dates and Times
+Data can be stored in form of dates or times. They are special kind of numeric data of type double.
+
+```{r}
+#System Datetime
+(date1 <- Sys.time())
+
+class(date1)
+typeof(date1)
+
+#System date
+(date2 <- Sys.Date())
+
+class(date2)
+typeof(date2)
+```
+
+## Data Type Conversion
+Data can be converted from one type to another depending on need of analysis or for storage.
+
+```{r}
+(numeric1 <- c(1, 2, 3, 4, 5, 6.5))
+(numeric2 <- c(1L, 2L, 3L, 4L, 5L))
+
+(data6 <- as.character(numeric1)) #converting numeric to character
+
+class(data6)
+typeof(data6)
+
+(data7 <- as.numeric(data6)) #converting character to numeric
+
+class(data7)
+typeof(data7)
+
+(data8 <- as.numeric(numeric2)) #converting integer to numeric
+
+class(data8)
+typeof(data8)
+```
+
+# DATA STRUCTURES
+These are ways of organising data for ease of analysis or storage. There are 4 ways that data can be organised in R. To know the structure of your data, use the function `str()`.
+
+## Vectors
+Are the smallest or easiest way of organising data. They are as simple as just one character or letter. Vectors are single dimensional and homogeneous (only stores one type of data).
+
+```{r}
+#numeric vectors
+(vect1 <- c(1, 3, 5, 68, 0)) #specified numbers, integers
+(vect2 <- 1:10) #vector of sequential numbers 1 to 10. Default constant is 1
+(vect4 <- 0:30) #vector of numbers increasing from 0 to 30. Reverse is true i.e., 30:0
+(vect6 <- 2.5:7.5)
+
+class(vect1)
+typeof(vect1)
+str(vect1)
+
+#character vectors
+(vect7 <- c("Jasper", "Dave", "Green", "A", ""))
+str(vect7)
+
+#Logical vectors
+(vect8 <- c(TRUE, TRUE, FALSE, TRUE))
+str(vect8)
+
+```
+
+### Forming sequence of numbers
+```{r}
+(vect9 <- seq(from = 1, 
+             to = 25, 
+             by = 2)) #creates sequence of numbers between 1 and 25 increasing by 2
+
+(vect10 <- seq(from = 1, 
+             to = 25, 
+             length.out = 50)) # creates a vector of length 50 (50 elements) from 1 to 25
+
+(vect11 <- 0:30)
+(length(vect11)) # function length before a vector object outputs vector length 
+```
+
+### Calculations using vectors
+
+```{r}
+vect4 * 2 #each element in the vector is multiplied by 2
+
+vect4 - 10 #10 is subtracted from each of the elements
+
+vect4 / 5 #each element of vect5 is divided by 4
+
+vect4^5 #each element is raised to the power of 4
+
+sqrt(vect4) #outputs square root of each element of vector4
+
+sqrt(vect4[31]) #outputs sqrt of element at position 31 of vect4
+```
+
+### Retrieving vector elements
+Square brackets [] are used to index the position of elements in any data structure, vectors included. Lowest index of an element is 1 and not 0.
+
+```{r}
+(vect4 <- 0:61)
+length(vect4)
+vect4[25] #retrieves element at position 25 in vector4
+vect4[26] #retrieves element at position 26 in vector 4
+vect4[62] #retrieves element at position 26 in vector 4
+```
+
+### Converting vectors from one type to another
+```{r}
+(data5 <- c(1, 2, 3, "Secondary", "University"))
+class(data5) #character vector
+
+(x <-as.numeric(data5)) #converting to numeric
+class(x)
+
+(data6 <- c(1, 2, 3))
+class(data6) #numeric vector
+
+(y <- as.character(data6)) #converting to character
+class(y)
+```
+
+## Lists
+
+### Creating lists
+```{r}
+
+(list1 <- list(
+  var1 = 1:20,
+  var2 = rep(c("A", "B"), 10)
+))
+
+```
+
+### Retreiving elements of a list
+
+```{r}
+list1$var2[6]
+
+list1[1]
+
+list1[[1]][6]
+list1$var1[6]
+
+(list2 <- list(
+  list1 = list(var1 = 1:20,
+               var2 = rep(c("A", "B"), 10)),
+  var3 = rep(c("A", "B"), 10)
+))
+
+
+class(list2)
+typeof(list2)
+str(list2)  # look at the structure
+
+list2$list1$var1[1]
+list2[[1]][1]
+
+list2$list1$var2[1]
+list2[[2]][1]
+
+
+(list_all <- list(
+  df1 = list(var1 = 1:20,
+             var2 = rep(c("A", "B"), 10)),
+  df2 = list(var3 = 1:20,
+             var4 = rep(c("A", "B"), 10))
+))
+
+```
+
+### convert list to dataframe
+```{r}
+#(list_all1 <- do.call(list_all)) #investigate
+```
+
+## Data Frames
+These are multidimensional collection of different data types. They are created using the  function `data.frame()` to assign object as a data frame. They are considered a collection of different types of vectors. Each of the columns is a vector and stores only one type of data. Has unlimited number of rows and columns. Most of the data collected and used are organised in data frames. To reference a column, use `$` symbol and `[]` for indexing the elements.
+
+### Creating a data frame
+
+```{r}
+(df1 <- data.frame(col1 = c(1, 2, 3, 4, 5,7),
+                  col2 = c("ann", "john", "erick", "james", "june", "Jasper")))
+
+class(df1)
+typeof(df1)
+str(df1)
+```
+
+### Retreiving elements of a data frame
+
+```{r}
+df1[2, 2] #outputs element at row2, column2 from data frame 1=john
+df1[6, 2]  #outputs element at row6, column 2 =jasper
+
+df1$col2 #outputs all elements of column2 , $reference the column 
+
+df1$col2[5] #outputs the element at position 5 of column 2=june
+
+df1[3, ] #display all elements in row3 -row number
+df1
+
+df1[df1$col3 < 12, ] #display rows with col3 less than 12
+df1[df1$col5 == 1, ] #display rows with col5 equals 1
+df1[df1$col2 == "john", ] #display rows with col2 containing john
+df1[df1$col6 > 1, ] #display rows with col6 greater than 1
+```
+
+### Calculations using elements of a data frame
+
+```{r}
+(df1$col3 <- df1$col1*4) #multiplies each element in column 1 by 4 and assigns them to column 3 of the same data frame
+
+(df1$col4 <- df1$col1/3) #divides each element of col1 by 3 and outputs in col4
+
+df1[, "col4"] #display all elements in col4-col name
+df1[, 4] #display all elements in col4-col number
+
+(df1$col5 <- round(df1$col4, 3)) #rounds off col4 to 4 d.p
+
+(df1$col6 <- signif(df1$col4, 3))
+
+```
+
+### Combining data frames
+
+```{r}
+(df2 <- data.frame(
+  var1 = 1:15,
+  var2 = 16:30
+))
+
+(df3 <- data.frame(
+  var3 = 1:15,
+  var4 = 16:30
+))
+
+
+(df4 <- data.frame(
+  var1 = 16:30,
+  var2 = 31:45
+))
+
+(df5 <- cbind(df2, df3)) #join two data frames row wise. Must have equal number of rows
+(df6 <- rbind(df2, df4)) #appends a data frame to another, col names must be similar
+
+(df2 <- data.frame(
+  var1 = 1:15,
+  var2 = 16:30
+))
+
+(df2$var3 <- paste(df2$var1, df2$var2)) #concatenates var1 and var2 with space in between
+(df2$var4 <- paste0(df2$var1, "-", df2$var2)) #concatenates var1 and var2 with a hyphen and no space between
+```
+
+
