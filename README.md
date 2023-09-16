@@ -20,8 +20,12 @@ This section describes how to manipulate data; clean and transform data using th
 ## 6. Exploratory Data Analysis: 
 Describes analysis of univariate and multivariate data
 
-## 6. Data Visualization:
+## 7. Data Visualization:
 Section describes how to visualize data using different methods
+
+## 8. Functions and Loops
+
+## 9. R Shiny
 
 
 
