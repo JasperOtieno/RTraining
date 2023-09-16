@@ -14,4 +14,6 @@ This program describes how to import ,clean and transform data using the STI dat
 
 ## 4. Importing datasets program : 
 This program describes how to import various types of dataset formats into R environment.
+## 5. LearningR:
+Documentation on basics of learning R.
 
