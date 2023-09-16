@@ -1,0 +1,16 @@
+---
+title: "Introduction to R Programming"
+author: "Jasper Otieno"
+date: 16/Sept/2023
+output: 
+  html_document: 
+    toc: yes
+    number_sections: yes
+editor_options: 
+  chunk_output_type: console
+---
+
+This is an introduction to R programming with end goal of learning the basics of R and finally being able to program in R.
+
+# DATA TYPES
+R stores data in different types or classes. There are about 4 classes/types of data that R can store
