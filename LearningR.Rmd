@@ -248,6 +248,7 @@ list2[[2]][1]
 ```
 
 ### convert list to dataframe
+
 ```{r}
 #(list_all1 <- do.call(list_all)) #investigate
 ```
@@ -348,9 +349,27 @@ df1[, 4] #display all elements in col4-col number
 ## Setting work directory
 ## Installing and loading a package
 
+```{r}
+library(tidyverse) #contains dplyr,ggplot2, lubridate, tidyr, tibble, stringr, readr, for data cleaning, manipulation, transformation, visualization
+
+library(haven) #for importing various types of data formats
+
+library(magrittr) #for piping i.e %>% 
+
+#install.packages("gmodels") #for descriptive data analysis
+#library(gmodels)
+
+#install.packages("table1") #for descriptive data analysis
+#library(table1)
+
+#library(readxl) #for importing xls dataset
+
+```
+
 # Reading and writing datasets
-## Reading and writing CSV files
-## Reading and writing txt files
+## Reading and writing CSV files (.csv)
+## Reading and writing excel files (.xls/.xlsx)
+## Reading and writing txt files (.txt/.doc)
 ## Reading and writing SAS files 
 ## Reading and writing STATA files .dta
 
@@ -367,4 +386,12 @@ df1[, 4] #display all elements in col4-col number
 ## Barcharts
 ## Heat maps
 ## Bubble graphs
+
+# Functions and Loops
+## Creating a function
+## Function Iteration
+
+# R Shiny
+## Building and interactive dashboard
+## Developing an RShiny Web App
 
