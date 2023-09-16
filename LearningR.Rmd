@@ -1,14 +1,16 @@
 ---
 title: "Introduction to R Programming"
 author: "Jasper Otieno"
-date: 16/Sept/2023
-output: 
-  html_document: 
+date: ' Sys.date()'
+output:
+  html_document:
     toc: yes
     number_sections: yes
     theme: readable
     fig_caption: yes
-editor_options: 
+  pdf_document:
+    toc: yes
+editor_options:
   chunk_output_type: console
 ---
 _______________________________________________________________________________
@@ -50,8 +52,8 @@ typeof(numeric2)
 ## Factor
 Refers to class of data that stores data in categorical format. They values take whole numbers hence are integer type.
 
-```{r}
-(fact1 <- factor("Primary", "Secondary", "University")) #not sure why Levels: University is in the output
+```{r factors, include=FALSE}
+(fact1 <- factor(c("ECDE", "Primary", "Secondary", "University"))) 
 
 class(fact1)
 typeof(fact1)
@@ -60,10 +62,10 @@ typeof(fact1)
 #fact2 <- as.factor(fact1, 
 #                   levels = c("Primary", "Secondary", "University"),
 #                   labels = c("Primary", "Secondary", "University"), 
-#                   values = c(1, 2, 3)) #has an error. to investigate cause of error
-#Error in as.factor(fact1, levels = c("Primary", "Secondary", "University"),  : 
-# unused arguments (levels = c("Primary", "Secondary", "University"), labels = #c("Primary", "Secondary", "University"), values = c(1, 2, 3))
+#                   values = c(1, 2, 3)) #has an error. to investigate cause of #error. Investigate during data cleaning
 
+#Converting factor to character
+(fact3 <- factor(fact1))
 ```
 
 ## Logical
@@ -141,6 +143,14 @@ str(vect7)
 (vect8 <- c(TRUE, TRUE, FALSE, TRUE))
 str(vect8)
 
+#Factor vector
+(gender <- c("F", "M", "F", "M", "M"))
+
+#convert gender to a factor
+(gender1 <- factor(gender))
+
+(fcoulor <- factor(c("blue", "green", "red", "pink", "green")))
+
 ```
 
 ### Forming sequence of numbers
@@ -199,10 +209,57 @@ class(data6) #numeric vector
 class(y)
 ```
 
+## Matrices
+These are similar to vectors however they are bi dimensional. The data is organised into rows and columns. Columns are clearly defined. Is combination of multiple vectors. Use the function `matrix()` to assign an object a matrix.
+Numeric matrices can be used to quickly carry out summaries. By default, matrix arranges the elements by the columns, that is the elements increasing from column to column. This can be changed using the `byrow=TRUE` argument. Matrices are homogeneous.
+
+### Creating a matrix
+
+```{r creatmtx}
+(mtx1 <- matrix(c(1:9), nrow=3, ncol=3))
+
+#change order of elements
+(mtx2 <- matrix(c(1:9), nrow=3, ncol=3, byrow = TRUE))
+```
+
+### Retreiving elements of a matrix
+```{r matrixs}
+mtx1
+mtx1[2,2] #pulls the element at row2 in column2
+mtx1[,3] #pulls all elements in column 3
+mtx1[3,] #pulls all elements in row3
+mtx1[7] #pulls the element at index 7
+mtx2[c(1,3),] #pulls everything in rows 1 and 3
+mtx2[c(1,3)] #returns values at index 1 and 7
+
+mtx2[,c(2,3)] #returns column 2 and 3
+mtx2[,1:3] #returns column 2 to 3
+```
+
+### Calculations using matrices
+```{r calcmtx}
+#summary
+summary(mtx1)
+summary(mtx2)
+
+#Further calculations
+(mtx3 <- matrix(c(seq(from= -98, to= 100, by=2)), nrow=10, ncol=10))
+apply(mtx3,2,mean) #calculating mean of each column, 2 means columns
+
+apply(mtx3,1,mean) #calculating mean of each row, 1 means rows
+apply(mtx3,1,sum) #calculating sum of each row, 1 means rows
+
+apply (mtx3,1,function(x)mean(x[x>0])) #mean of rows of only positive numbers
+
+```
+
 ## Lists
+Is one dimensional structures that can hold different types. It's heterogeneous
+Use the function `list()` to create a list. It's like a bucket of different items put together.
 
 ### Creating lists
 ```{r}
+(list0 <- c("look", 1, TRUE, FALSE)) #holds anything parsed to it
 
 (list1 <- list(
   var1 = 1:20,
@@ -212,7 +269,6 @@ class(y)
 ```
 
 ### Retreiving elements of a list
-
 ```{r}
 list1$var2[6]
 
@@ -230,7 +286,7 @@ list1$var1[6]
 
 class(list2)
 typeof(list2)
-str(list2)  # look at the structure
+str(list2)  
 
 list2$list1$var1[1]
 list2[[1]][1]
@@ -266,6 +322,20 @@ These are multidimensional collection of different data types. They are created 
 class(df1)
 typeof(df1)
 str(df1)
+```
+
+### Create data frames from different vectors
+```{r}
+(fname <- c("Ken", "Cate", "Amalia", "Jimmy", "dorcas")) #character vector
+(score <- c(34, 67, 90, 200, 20)) #numeric vector
+(fcolour = factor(c("blue", "green", "red", "pink", "green"))) #factor vector
+(gender2 = factor(c("M", "F", "F", "M", "F"))) #factor vector
+(truefalse = c(TRUE, TRUE, FALSE, TRUE, FALSE))#logical vector
+
+#Combine above to form data frame
+(df = data.frame(fname, score, fcolour, gender, truefalse))
+
+str(df)
 ```
 
 ### Retreiving elements of a data frame
@@ -334,16 +404,39 @@ df1[, 4] #display all elements in col4-col number
 (df2$var4 <- paste0(df2$var1, "-", df2$var2)) #concatenates var1 and var2 with a hyphen and no space between
 ```
 
-## Matrices
-### Creating a matrix
-### Retreiving elements of a matrix
-### Combining matrices
-
-
 ## Arrays
-### Creating an array
-### Retreiving elements of an array
+Are multidimensional. Can be more than 2 dimensions. Can be considered super set of matrices. Are homogeneous. Can be created by combining matrices. You cannot view an array in one go but can access the levels of the arrays (each of the matrices combined). Useful when stacking matrices on top of each other.
+Arrays cannot be used to perform calculations but to store multiple matrices.
 
+### Creating an array
+```{r}
+v1 =c(1:12)
+(m1 = matrix(v1, nrow=3, ncol=4, byrow=TRUE))
+
+v2 = c(25:36)
+(m2 = matrix(v2, nrow=3, ncol=4, byrow=TRUE))
+
+(A = array(c(m1,m2), dim=c(3,4,2)))# 3=rows, 4=columns, 2=number of matrices/levels in the array
+```
+
+### Retreiving levels of an array
+```{r}
+A[,,1] #level 1
+A[,,2] #level 2
+```
+
+### Defining array rows and columns
+```{r}
+names <- c("jimmy","july", "feb") #row names
+info <- c("Height", "Weight", "Hair colour", "skin colour") #column names
+(A = array(c(m1,m2), dim=c(3,4,2), dimnames= list(names, info)))
+```
+
+### Retreiving values of an array from different levels
+```{r}
+A[1,,1] #returns first row of first level
+A[1,,2] #returns first row of second level
+```
 
 # Package installation
 ## Setting work directory
