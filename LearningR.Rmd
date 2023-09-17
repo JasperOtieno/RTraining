@@ -313,7 +313,7 @@ list2[[2]][1]
 ```
 
 ### Data Frames
-These are multidimensional collection of different data types. They are created using the  function `data.frame()` to assign object as a data frame. They are considered a collection of different types of vectors. Each of the columns is a vector and stores only one type of data. Has unlimited number of rows and columns. Most of the data collected and used are organised in data frames. To reference a column, use `$` symbol and `[]` for indexing the elements.
+These are two dimensional collection of different data types. The data are organised in unlimited number of rows and columns with each row representing observations and each column representing variables.They are created using the function `data.frame()` to assign an object as a data frame. Each of the columns is vectorised and stores only one type of data. Most of the data collected and used are organised in data frames. To reference a column, use `$` symbol and `[]` for indexing the elements.
 
 #### Creating a data frame
 
@@ -326,7 +326,7 @@ typeof(df1)
 str(df1)
 ```
 
-#### Create data frames from different vectors
+#### Create data frames from different types of vectors
 ```{r}
 (fname <- c("Ken", "Cate", "Amalia", "Jimmy", "dorcas")) #character vector
 (score <- c(34, 67, 90, 200, 20)) #numeric vector
@@ -407,7 +407,7 @@ df1[, 4] #display all elements in col4-col number
 ```
 
 ### Arrays
-Are multidimensional. Can be more than 2 dimensions. Can be considered super set of matrices. Are homogeneous. Can be created by combining matrices. You cannot view an array in one go but can access the levels of the arrays (each of the matrices combined). Useful when stacking matrices on top of each other.
+Are multidimensional. Can be more than 1 dimensions and as many as user would wish. Can be considered super set of matrices. Are homogeneous. Can be created by combining matrices. You cannot view an array in one go but can access the levels of the arrays (each of the matrices combined). Useful when stacking matrices on top of each other.
 Arrays cannot be used to perform calculations but to store multiple matrices.
 
 #### Creating an array
@@ -441,13 +441,195 @@ A[1,,2] #returns first row of second level
 ```
 
 ## Functions and Loops
+Functions are group of instructions that help users perform/complete a specific task. They can be as complex as an `R package` (collection of functions) or as simple as the assign symbol `(<-)`. Most functions have so far written and can be automatically accessed in R while others need to be access via installing R packages but sometimes one needs a customised function to complete a task. Curly brackets `{}` are used to mark the beginning  and end of instructions to be performed. The `return()` function is used to explicitly instruct R to print the output/result of the last instruction supplied in a function.
+
+Functions have arguments enclosed in a bracket. The arguments are the inputs that the function would use during processing. There must always be an output in a function sometimes produced by the return function.
+Functions in R programming are like macros in SAS or STATA programming.
+
+### Available Functions
+The functions below (not all)are already available can be used to perform specific tasks as desired.
+
+```{r}
+v <- c(2,3,45) #assignment symbol for assigning instructions as an object
+
+c(2,3,"x") # c is function that collects together everything in the brackets
+
+sum(2,3,4) #sum functions returns the sum total of items in the bracket
+
+plot(cars) #returns a plot of dist vs speed from cars dataset
+
+hist(cars$speed) #returns a histogram
+
+attach(cars) # attach function when used before a dataset name, helps user to avoid attaching dataset name to a variable name.
+
+hist(dist) #works without attaching dataset name to the variable
+
+#View(cars) #enables one view the dataset
+
+head(cars) #returns first six observations
+
+tail(cars) #returns last six observations
+
+#data() #lists all datasets available in a package
+
+summary(cars) #returns min,1st QTR, median, mean, 3rd QTR, max of all numeric variables in the dataset.
+
+length(cars) #returns total number of variables in the dataset
+length(speed) #returns total number of observations for the variable
+
+unique(dist) #returns all unique entries in a variable
+
+cars[10:15,1:2] #[]subsets data to select observations from row 10 to 15 for all the columns
+#function(x) #the function itself is a function that instructs R to treat an object as a function for performing that task.
+
+#%>% #pipe symbol that represents "THEN" and moves processing moves to the next line of instruction. Is handy when you want to avoid nesting of functions.
+
+```
+
 ### Creating a function
-### Function Iteration
+We write functions to help us to write code in easy to understand chunks. Also, it helps to write reusable code avoid repetitive code lines. A functional function must have certain parameters: A function `name` which is the assigned to the function `function()`, `inputs` or arguments supplied inside the brackets (function(x,y,z)), the curly brackets `{}` to enclose the instructions to be performed, `instructions` to performed supplied inside the curly brackets, then finally the `return()` to output the result of the last instruction performed. Below is a general structure of a function.
+
+functionname <- function(inputs){
+  
+output_value <- do_something(input)
+    
+return(output_value)
+
+}
+
+The curly brackets indicate that the instructions inside them are a group hence must be processed together.
+
+```{r}
+#Function to calculate the volume of a box
+    # inputs: length=23, width= 20, height=10
+
+boxvolume <- function(length, width, height){
+  area_of_crosssection <- length*height
+  volume <- area_of_crosssection * width
+  return(volume)
+}
+
+#calling the function
+boxvolume(23, 20,10)
+
+#store the results for use later
+bvolume <- boxvolume(23, 20,10)
+```
+
+### For Loops
+
+#### For Loops by value
+For Loops are used for repeating things in R. They are fundamental structures for performing repetitions in  programming. They work by performing the same actions for each item in a list of items like a vector. The key word is `for` which means for each item in the list of items supplied. Basic structure looks like this:
+
+for(item in vector_of_items){
+
+do_something(item)
+
+}
+
+You need to first create a vector of items to loop over.
+
+```{r}
+#A For Loop to calculate masses from each volume of the box
+
+volumes <- c(1.6, 3, 8, 9)
+for(vol in volumes){
+  mass <- 2.65*volumes^0.95
+  print(mass)
+} #not sure why four rows are created
+```
+
+#### For Loops by index
+Loops over a vector of integer index values typically starting at 1, and these integers are used to access the values we need from one or more vectors at the position indicated by the index.
+
+```{r}
+volumes <- c(1.6, 3, 8, 9)
+
+for(i in 1:length(volumes)){
+  mass <- 2.65*volumes[i]^0.95
+  print(mass)
+}
+```
+
+Looping by index helps in storing the results of the loop for use later unlike looping by values. To store the values of the loop, create an empty object of the same length as the vector of items.
+
+```{r}
+volumes <- c(1.6, 3, 8, 9)
+masses <- vector(length=length(volumes), mode="numeric") #vector function creates an empty vector with argument length, mode option changes the type of vector
+
+for(i in 1:length(volumes)){
+  mass <- 2.65*volumes[i]^0.95
+  masses[i] <- mass #stores the outputs as it loops
+}
+
+masses 
+```
+
+Looping by index also allows users to loop over multiple objects at the same time. For example if you want to change the constant 2.65 and exponent 0.95 depending on the circumstance
+
+```{r}
+volumes <- c(1.6, 3, 8, 9)
+cons <- c(2.65, 3.4, 6.1, 4.3)
+expo <- c(0.95, 1.1, 1.5, 2.5)
+
+masses <- vector(length=length(volumes), mode="numeric") #vector function creates an empty vector with argument length, mode option changes the type of vector
+
+for(i in 1:length(volumes)){
+  mass <- cons[i]*volumes[i]^expo[i]
+  masses[i] <- mass #stores the outputs as it loops
+}
+
+masses 
+```
+
+#### Looping Using Functions
+You can combine loops and functions by putting most of the codes we want to run in a function the calling one more functions each time through the loop. As an example we can use a non-vectorised function to estimate the mass. This type of loop uses the `if` and `else` functions.
+
+```{r}
+est_mass <- function(volume){
+  if (volume>5){
+    mass <- 2.65*volume^0.95
+  } else {
+    mass <- NA
+  }
+  return(mass)
+}
+
+volumes <- c(1.6,3,8,4,9)
+masses <- vector(length=length(volumes), mode="numeric")
+
+for(i in 1:length(volumes)){
+  mass <- est_mass(volumes[i])
+  masses[i] <- mass
+}
+
+masses
+
+(mass_sapply <- sapply(volumes, est_mass)) # this code is simmilar to the above for loop
+
+```
+
+#### Looping over files
+The code below is commented out as there are no files yet in the training folder directory.
+```{r}
+#data_files <- list.files(pattern="") #get list of files you want
+#results <- vector(length=length(data_files), mode="integer") #create an empty vector of length equal to number of files
+
+#for(i in 1:length(data_files)){
+#  data <- read.csv(data_file[i]) #read the csv file (if they are csv files)
+#  count <- nrow(data) #count observations if this is what your want
+#  results[1] <- count #store the counts for each data files
+#}
+```
+
+### While Loops
+
+### If Statements
 
 ## Package installation
 ### Setting work directory
-### Installing and loading a package
 
+### Installing and loading a package
 ```{r}
 library(tidyverse) #contains dplyr,ggplot2, lubridate, tidyr, tibble, stringr, readr, for data cleaning, manipulation, transformation, visualization
 
@@ -474,6 +656,9 @@ library(magrittr) #for piping i.e %>%
 ### Reading tables/databases
 
 ## Data Wrangling
+### Exploring data
+### Cleaning data
+### Transforming data
 
 ## Exploratory Data Analysis
 ### Univariate data analysis
