@@ -519,8 +519,6 @@ bvolume <- boxvolume(23, 20,10)
 ```
 
 ### For Loops
-
-#### For Loops by value
 For Loops are used for repeating things in R. They are fundamental structures for performing repetitions in  programming. They work by performing the same actions for each item in a list of items like a vector. The key word is `for` which means for each item in the list of items supplied. Basic structure looks like this:
 
 for(item in vector_of_items){
@@ -530,6 +528,10 @@ do_something(item)
 }
 
 You need to first create a vector of items to loop over.
+There are two variants of the For loops. By value and by index.
+
+#### For Loops by value
+For loop by value uses the value of a vector to loop over and over until all the elements of the vector have been processed.
 
 ```{r}
 #A For Loop to calculate masses from each volume of the box
@@ -542,7 +544,7 @@ for(vol in volumes){
 ```
 
 #### For Loops by index
-Loops over a vector of integer index values typically starting at 1, and these integers are used to access the values we need from one or more vectors at the position indicated by the index.
+For loops by index loops over a vector using the index of each element typically starting at 1. The integers (indices) are used to access the values we need from one or more vectors at the position indicated by the index.
 
 ```{r}
 volumes <- c(1.6, 3, 8, 9)
@@ -693,22 +695,44 @@ Hoodie(26)
 ```
 
 ## R Packages
+R provides a wide range of packages that enable users to perform specific tasks efficiently in R environment. An R package is a collection of functions and can be downloaded from CRAN (Comprehensive R Archive Network). CRAN is the repository for R packages. Some packages already exist in the R environment but some of them must be installed first before they can used. Some packages exists together in an ecosystem of packages for specific tasks. For example the tydyverse package is an ecosystem of packages that enable users clean data, produce graphs and charts, transform data, import data and handle dates
+
 ### Installing and loading a package
+Installing an R package is very simple. The function `install.packages("packagename")`is used. This makes the package available for access to RStudio but cannot be used yet. One has to load the package into R environment to be able use it and this is done using the function `library(packagename)`. Some packages can exist in more than one ecosystem and one might wish to explicitly indicate the ecosystem from which the package is from by using using double colons as `ecosystemname::packagename`. One has to have an internet connection to be able install packages.
+
+Below are examples of packages commonly used.
+
+`install.packages("magrittr")`
+
+`install.packages("table1")` 
+
+`install.packages("arsenal")`
+
+`install.packages("tinytex")` 
+
+`install.packages("readxl")` 
+
+`install.packages("haven")`
+
+`install.packages("gmodels")`
 
 ```{r}
-library(tidyverse) #contains dplyr,ggplot2, lubridate, tidyr, tibble, stringr, readr, for data cleaning, manipulation, transformation, visualization
 
-library(haven) #for importing various types of data formats
+library(tidyverse) #en ecosystem (collection) of packages like the dplyr,ggplot2, lubridate, tidyr, tibble, stringr, readr, for data cleaning, manipulation, transformation, visualization
 
-library(magrittr) #for piping i.e %>% 
+library(magrittr)   # package for piping i.e %>% piping is handy when you want to avoid nesting of functions.
 
-#install.packages("gmodels") #for descriptive data analysis
-#library(gmodels)
+library(table1) #for descriptive data analysis in HTML
 
-#install.packages("table1") #for descriptive data analysis
-#library(table1)
+library(arsenal) #for running proc compare on two datasets and other complex tasks
 
-#library(readxl) #for importing xls dataset
+library(tinytex) #contains functions for compiling LaTex documents
+
+library(readxl) #for importing xls dataset
+
+library(haven) #for importing and exporting SPSS, STATA and SAS files
+
+library(gmodels) #package for model fitting
 
 ```
 
