@@ -1,9 +1,9 @@
 ---
 title: "Introduction to R Programming"
 author: "Jasper Otieno"
-date: "Created on 15/Sept/2023"
+date: "Updated on 18/Sept/2023"
 output:
-  html_document:
+  html_document: 
     toc: yes
     number_sections: yes
     theme: readable
@@ -23,7 +23,7 @@ This is an introduction to R programming with end goal of learning the basics of
 R stores data in different types or classes. There are about 4 classes/types of data that R can store. To check the kind of class of data you are working with, use the function `class()` and use the function `typeof()` to check the type of data.
 
 ### Character
-Refers to data in form of letters, sentences or numbers formatted to texts/strings e.g, names of people (james, rose), letter A, B, or colours, green, blue. They must always be wrapped in double quotation marks when referenced.
+Refers to data in form of letters, sentences or numbers formatted to texts/strings e.g, names of people (James, rose), letter A, B, or colours, green, blue. They must always be wrapped in double quotation marks when referenced.
 
 ```{r}
 (char1 <- c("ann", "erick", "", "l"))
@@ -163,7 +163,7 @@ str(vect8)
 
 (vect10 <- seq(from = 1, 
              to = 25, 
-             length.out = 50)) # creates a vector of length 50 (50 elements) from 1 to 25
+             length.out = 50)) # creates a vector of length 50 (50 elements) from 1 to 25 equally spaced
 
 (vect11 <- 0:30)
 (length(vect11)) # function length before a vector object outputs vector length 
@@ -253,63 +253,6 @@ apply(mtx3,1,sum) #calculating sum of each row, 1 means rows
 
 apply (mtx3,1,function(x)mean(x[x>0])) #mean of rows of only positive numbers
 
-```
-
-### Lists
-Is one dimensional structures that can hold different types. It's heterogeneous
-Use the function `list()` to create a list. It's like a bucket of different items put together.
-
-#### Creating lists
-```{r}
-(list0 <- c("look", 1, TRUE, FALSE)) #holds anything parsed to it
-
-(list1 <- list(
-  var1 = 1:20,
-  var2 = rep(c("A", "B"), 10)
-))
-
-```
-
-#### Retreiving elements of a list
-```{r}
-list1$var2[6]
-
-list1[1]
-
-list1[[1]][6]
-list1$var1[6]
-
-(list2 <- list(
-  list1 = list(var1 = 1:20,
-               var2 = rep(c("A", "B"), 10)),
-  var3 = rep(c("A", "B"), 10)
-))
-
-
-class(list2)
-typeof(list2)
-str(list2)  
-
-list2$list1$var1[1]
-list2[[1]][1]
-
-list2$list1$var2[1]
-list2[[2]][1]
-
-
-(list_all <- list(
-  df1 = list(var1 = 1:20,
-             var2 = rep(c("A", "B"), 10)),
-  df2 = list(var3 = 1:20,
-             var4 = rep(c("A", "B"), 10))
-))
-
-```
-
-#### convert list to dataframe
-
-```{r}
-#(list_all1 <- do.call(list_all)) #investigate
 ```
 
 ### Data Frames
@@ -405,6 +348,65 @@ df1[, 4] #display all elements in col4-col number
 (df2$var3 <- paste(df2$var1, df2$var2)) #concatenates var1 and var2 with space in between
 (df2$var4 <- paste0(df2$var1, "-", df2$var2)) #concatenates var1 and var2 with a hyphen and no space between
 ```
+
+### Lists
+Is one dimensional structures that can hold different types. It's heterogeneous
+Use the function `list()` to create a list. It's like a bucket of different items put together. Individual elements of a list can be extracted by referencing the name of object in the list using `$` and by position `x[[i]]`.
+You can embed vectors, matrices and data frames all in a list.
+
+#### Creating lists
+```{r}
+(list0 <- c("look", 1, TRUE, FALSE)) #holds anything parsed to it
+
+(list1 <- list(
+  var1 = 1:20,
+  var2 = rep(c("A", "B"), 10)
+))
+
+```
+
+#### Retreiving elements of a list
+```{r}
+list1$var2[6]
+
+list1[1]
+
+list1[[1]][6]
+list1$var1[6]
+
+(list2 <- list(
+  list1 = list(var1 = 1:20,
+               var2 = rep(c("A", "B"), 10)),
+  var3 = rep(c("A", "B"), 10)
+))
+
+
+class(list2)
+typeof(list2)
+str(list2)  
+
+list2$list1$var1[1]
+list2[[1]][1]
+
+list2$list1$var2[1]
+list2[[2]][1]
+
+
+(list_all <- list(
+  df1 = list(var1 = 1:20,
+             var2 = rep(c("A", "B"), 10)),
+  df2 = list(var3 = 1:20,
+             var4 = rep(c("A", "B"), 10))
+))
+
+```
+
+#### convert list to dataframe
+
+```{r}
+#(list_all1 <- do.call(list_all)) #investigate
+```
+
 
 ### Arrays
 Are multidimensional. Can be more than 1 dimensions and as many as user would wish. Can be considered super set of matrices. Are homogeneous. Can be created by combining matrices. You cannot view an array in one go but can access the levels of the arrays (each of the matrices combined). Useful when stacking matrices on top of each other.
@@ -582,10 +584,70 @@ for(i in 1:length(volumes)){
 masses 
 ```
 
-#### Looping Using Functions
-You can combine loops and functions by putting most of the codes we want to run in a function the calling one more functions each time through the loop. As an example we can use a non-vectorised function to estimate the mass. This type of loop uses the `if` and `else` functions.
+#### Looping over files
+The code below is commented out as there are no files yet in the training folder directory.
 
 ```{r}
+#data_files <- list.files(pattern="") #get list of files you want
+#results <- vector(length=length(data_files), mode="integer") #create an empty vector of length equal to number of files
+
+#for(i in 1:length(data_files)){
+#  data <- read.csv(data_file[i]) #read the csv file (if they are csv files)
+#  count <- nrow(data) #count observations if this is what your want
+#  results[1] <- count #store the counts for each data files
+#}
+```
+
+### While Loops
+While loops allows you to the code to repeat while a condition is true and stops when the condition is no longer true.
+
+```{r}
+#What will be the amount at the end of a year after monthly deposit of 1000 and interest rate of 8% on monthly balance
+
+Whileloop <- function(){
+  
+  acc <- c(0)
+  Month = 1
+  
+  while (Month<=12){
+    
+    acc <- (acc*1.08)+1000 #replace the first vector after each calculation
+    print(acc)
+    
+    Month <- Month + 1 #replace the counter with the next increment
+    #print(counter)
+  }
+}
+
+Whileloop()
+
+#Above is similar to For loop but no need of adding the iterator
+Forloop <- function(){
+  
+  acc=0
+  
+  for (Month in 1:12){
+    acc <- (acc * 1.08) +1000
+    
+    print(acc)
+    #print(Month)
+  }
+    
+}
+
+Forloop()
+
+#How do I get just the last value?
+```
+
+### Looping Using the if Statements
+You can combine loops and functions by putting most of the codes we want to run in a function the calling one more functions each time through the loop. As an example we can use a non-vectorised function to estimate the mass. This type of loop uses the `if` and `else` functions.
+
+If statements allows users to write functions that outputs a result if a condition is true.
+
+```{r}
+#Example 1 : Combined if statement and For Loop
+
 est_mass <- function(volume){
   if (volume>5){
     mass <- 2.65*volume^0.95
@@ -605,31 +667,34 @@ for(i in 1:length(volumes)){
 
 masses
 
-(mass_sapply <- sapply(volumes, est_mass)) # this code is simmilar to the above for loop
+(mass_sapply <- sapply(volumes, est_mass)) # this code is similar to the above for loop
 
 ```
 
-#### Looping over files
-The code below is commented out as there are no files yet in the training folder directory.
+
 ```{r}
-#data_files <- list.files(pattern="") #get list of files you want
-#results <- vector(length=length(data_files), mode="integer") #create an empty vector of length equal to number of files
+#Example 2
+#Test what to wear depending on  temperature of the day.
 
-#for(i in 1:length(data_files)){
-#  data <- read.csv(data_file[i]) #read the csv file (if they are csv files)
-#  count <- nrow(data) #count observations if this is what your want
-#  results[1] <- count #store the counts for each data files
-#}
+Hoodie <- function(temperature){
+  
+  if (temperature <25){
+    print("Wear hoodie")
+  } 
+  else if (temperature == 25){
+    print("Wear vest")
+  } 
+  else {
+    print("Wear nothing")
+  }
+}
+
+Hoodie(26)
 ```
 
-### While Loops
-
-### If Statements
-
-## Package installation
-### Setting work directory
-
+## R Packages
 ### Installing and loading a package
+
 ```{r}
 library(tidyverse) #contains dplyr,ggplot2, lubridate, tidyr, tibble, stringr, readr, for data cleaning, manipulation, transformation, visualization
 
@@ -647,17 +712,22 @@ library(magrittr) #for piping i.e %>%
 
 ```
 
-## Reading and writing datasets
-### Reading and writing CSV files (.csv)
-### Reading and writing excel files (.xls/.xlsx)
-### Reading and writing txt files (.txt/.doc)
-### Reading and writing SAS files 
-### Reading and writing STATA files .dta
-### Reading tables/databases
-
 ## Data Wrangling
+### Setting work directory
+### Reading and writing datasets
+#### Reading and writing CSV files (.csv)
+#### Reading and writing excel files (.xls/.xlsx)
+#### Reading and writing txt files (.txt/.doc)
+#### Reading and writing SAS, STATA, SPSS Files 
+#### Reading tables/databases
+#### Web Scrapping
 ### Exploring data
 ### Cleaning data
+#### Handling Missing data
+#### Handling dates and times
+#### Handling strings
+#### Handling dupicates
+#### Handling factor datapoints
 ### Transforming data
 
 ## Exploratory Data Analysis
