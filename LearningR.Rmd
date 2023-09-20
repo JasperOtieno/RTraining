@@ -1,7 +1,7 @@
 ---
 title: "Introduction to R Programming"
-author: "Jasper Otieno"
-date: "Updated on 18/Sept/2023"
+author: "By: Jasper Otieno"
+date: "Last updated on 20/Sept/2023"
 output:
   html_document: 
     toc: yes
@@ -186,7 +186,7 @@ sqrt(vect4[31]) #outputs sqrt of element at position 31 of vect4
 ```
 
 #### Retrieving vector elements
-Square brackets [] are used to index the position of elements in any data structure, vectors included. Lowest index of an element is 1 and not 0.
+Square brackets `[]` are used to index the position of elements in any data structure, vectors included. Lowest index of an element is 1 and not 0.
 
 ```{r}
 (vect4 <- 0:61)
