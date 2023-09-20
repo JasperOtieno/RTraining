@@ -725,23 +725,23 @@ Below are examples of packages commonly used.
 
 ```{r}
 
-library(tidyverse) #en ecosystem (collection) of packages like the dplyr,ggplot2, lubridate, tidyr, tibble, stringr, readr, for data cleaning, manipulation, transformation, visualization
+#library(tidyverse) #en ecosystem (collection) of packages like the dplyr,ggplot2, lubridate, tidyr, tibble, stringr, readr, for data cleaning, manipulation, transformation, visualization
 
-library(magrittr)   # package for piping i.e %>% piping is handy when you want to avoid nesting of functions.
+#library(magrittr)   # package for piping i.e %>% piping is handy when you want to avoid nesting of functions.
 
-library(table1) #for descriptive data analysis in HTML
+#library(table1) #for descriptive data analysis in HTML
 
-library(arsenal) #for running proc compare on two datasets and other complex tasks
+#library(arsenal) #for running proc compare on two datasets and other complex tasks
 
-library(tinytex) #contains functions for compiling LaTex documents
+#library(tinytex) #contains functions for compiling LaTex documents
 
-library(readxl) #for importing xls dataset
+#library(readxl) #for importing xls dataset
 
-library(haven) #for importing and exporting SPSS, STATA and SAS files
+#library(haven) #for importing and exporting SPSS, STATA and SAS files
 
-library(gmodels) #package for model fitting
+#library(gmodels) #package for model fitting
 
-library(knitr) #package for dynamic reporting in R
+#library(knitr) #package for dynamic reporting in R
 
 ```
 
@@ -775,24 +775,61 @@ The readr package of the tidyverse has functions that enables R users to read an
 `Excel` files can include `xls` or `xlsx`. These are files with data arrange in rows and columns. R has the package `readxl` that allows user to read in these files. Use the function `read_excel(excelname)` to read the files. `read_xls()` and `read_xlsx()` also exists for reading excel files. Run `?read_excel` to learn about the options that the function can take.
 
 ```{r}
-(df <- read_excel("Dataset/STIData.xls")) #practice data for this training
+#(df <- read_excel("Dataset/STIData.xls")) #practice data for this training
 #View(df) #you can view the data to see all the variables and observations.
 #R will always rename variables that have similar names as has happened with the sex variable. 
 ```
 
+`Text` files are files with values separated by various characters; comma, space, pipe, or semi colon. The `read.table()` function is inbuilt R for reading such files. I requires no package installation. The function takes a number of options. The function is similar to read.csv in reading in csv files however, one has to specify the value separator. Run `?read_table` to learn about the options that the function can take.
 
-#### Reading and writing txt files (.txt/.doc)
-#### Reading and writing SAS, STATA, SPSS Files 
-#### Reading tables/databases
-#### Web Scrapping
+```{r}
+#(df <- read.table("Dataset/filename.txt", ""))
+```
+
+R also support reading data from other soft ware eg `SAS, STATA or SPSS` files. The package `haven` has a number of functions has allows one to reading in file formats from other software.
+
+You can also read in html tables, tables on web pages. The function `readHTMLTable()` allows you to download a webpage table and analyse. 
+
+To connect to databases to read tables directly from a database, one needs the function `dbConnect(dbname(), user="username", password="password", dbname="databasename", host="hos")`
+
 ### Exploring data
+Before working with your data you need to understand the data. This entails knowing number of your variables and their characteristics, the dimensions of the data, number of observations and the structure of your data. The tidyverse package has packages and functions that helps you explore and clean data. 
+
+Exploring the `STIData`, a real study conducted in Kenya. The `starwars` data is also a good one to explore.
+
+Below are some of the functions you can use to explore your data.
+
+```{r}
+library(tidyverse) #first loading the package you will need
+#library(readxl)  #load the package for reading the kind of the format
+#(df <- read_excel("Dataset/STIData.xls")) #read in your data
+#View(df) #view your data
+#dim(df) #knowing the dimensions of your data, number of observations and variables
+#str(df) #displays the structure of the data
+#attach(df) #avoid the need of attaching the name of dataset to varnames
+#head(df) #have a glimbse of the first 6 variables
+#tail(df) #have a glimbse of the last 6 variables
+#df[10:30] #have a look at observations from rows 10 to 30
+#names(df) #lists variable names
+#length(df) #variables in the dataset
+#length(DurationOfillness) #total observations in the variable
+#class(DurationOfillness) #types of variable
+#unique(Sex...35) #unique entries in the variable
+#table(A5MaritalStatus) #table summary of variable, but doesn't count missing values
+##View(sort(table(IdNumber), decreasing=TRUE)) #wrapping functions
+#summary(Weight) #measure of spread
+#boxplot(Weight) #gives a quick view of distribution, box and whiskers
+#hist(Weight) #view distribution of any numeric variable, good data should be normally distributed
+
+```
+
 ### Cleaning data
 #### Handling Missing data
 #### Handling dates and times
 #### Handling strings
 #### Handling dupicates
-#### Handling factor datapoints
-### Transforming data
+#### Handling factor variables
+#### Restructuring data
 
 ## Exploratory Data Analysis
 ### Univariate data analysis
