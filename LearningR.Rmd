@@ -820,7 +820,6 @@ library(tidyverse) #first loading the package you will need
 #summary(Weight) #measure of spread
 #boxplot(Weight) #gives a quick view of distribution, box and whiskers
 #hist(Weight) #view distribution of any numeric variable, good data should be normally distributed
-
 ```
 
 ### Cleaning data
@@ -837,7 +836,7 @@ library(tidyverse) #first loading the package you will need
 
 ## Data Visualisation
 ### Boxplots
-### Piecharts
+### Piecharts 
 ### Histograms
 ### Barcharts
 ### Heat maps
