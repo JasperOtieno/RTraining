@@ -795,7 +795,7 @@ To connect to databases to read tables directly from a database, one needs the f
 ### Exploring data
 Before working with your data you need to understand the data. This entails knowing number of your variables and their characteristics, the dimensions of the data, number of observations and the structure of your data. The tidyverse package has packages and functions that helps you explore and clean data. 
 
-Exploring the `STIData`, a real study conducted in Kenya. The `starwars` data is also a good one to explore.
+Exploring the `starwars`, a dataset accessed from R. The `starwars` data is a good one to explore.
 
 Below are some of the functions you can use to explore your data.
 
@@ -803,32 +803,90 @@ Below are some of the functions you can use to explore your data.
 library(tidyverse) #first loading the package you will need
 #library(readxl)  #load the package for reading the kind of the format
 #(df <- read_excel("Dataset/STIData.xls")) #read in your data
+
+(df <- starwars)
+glimpse(df)
 #View(df) #view your data
-#dim(df) #knowing the dimensions of your data, number of observations and variables
+dim(df) #knowing the dimensions of your data, number of observations and variables
+
 #str(df) #displays the structure of the data
 #attach(df) #avoid the need of attaching the name of dataset to varnames
-#head(df) #have a glimbse of the first 6 variables
-#tail(df) #have a glimbse of the last 6 variables
-#df[10:30] #have a look at observations from rows 10 to 30
-#names(df) #lists variable names
-#length(df) #variables in the dataset
-#length(DurationOfillness) #total observations in the variable
-#class(DurationOfillness) #types of variable
-#unique(Sex...35) #unique entries in the variable
-#table(A5MaritalStatus) #table summary of variable, but doesn't count missing values
-##View(sort(table(IdNumber), decreasing=TRUE)) #wrapping functions
-#summary(Weight) #measure of spread
-#boxplot(Weight) #gives a quick view of distribution, box and whiskers
-#hist(Weight) #view distribution of any numeric variable, good data should be normally distributed
+#detach(df)
+head(df) #have a glimbse of the first 6 variables
+tail(df) #have a glimbse of the last 6 variables
+names(df) #lists variable names
+length(df) #variables in the dataset
+length(df$species) #total observations in the variable
+class(df$species) #types of variable
+unique(df$sex) #unique entries in the variable
+table(df$height) #table summary of variable, but doesn't count missing values
+#View(sort(table(df$height), decreasing=TRUE)) #wrapping functions
+summary(df$mass) #measure of spread
+boxplot(df$height) #gives a quick view of distribution, box and whiskers
+hist(df$height) #view distribution of any numeric variable, good data should be normally distributed
+
 ```
 
 ### Cleaning data
+```{r}
+(df <- starwars)
+df %>% mutate(weight = df$mass*10) # create a new variable from an existing one
+
+df %>%  select(1:5) #selecting variables in position 1 to 5
+
+(misshair <- df %>%  
+             filter(is.na(df$hair_color)))# Selecting rows with hair colour missing
+
+#Selecting rows then only 3 rows then sorting from largest to smallest
+
+(flt <- df %>%  
+        filter(hair_color == "brown")%>% 
+        select(name, height, hair_color)%>%  
+        arrange (-height) %>% 
+        glimpse())
+
+#recoding observations: not working 
+
+(recod<- df %>% 
+        mutate(sexcodes=df$sex) #%>% 
+        #recode(sexcodes,"male"=1, "female"=2, "hermaphroditic"=3, "none"=99, "NA"=97)
+)
+```
+
 #### Handling Missing data
 #### Handling dates and times
 #### Handling strings
 #### Handling dupicates
 #### Handling factor variables
+
 #### Restructuring data
+Load gapminder dataset
+
+```{r}
+library(gapminder)
+(gapm <- gapminder)
+#unique(gapminder$country)
+str(gapm)
+#View(gapm)
+
+names(gapm)
+#Select observations from Kenya in the gapminder
+
+(kenya <- gapm %>% 
+          filter(country=="Kenya") %>% 
+          select(country,year, lifeExp, pop, gdpPercap) %>% 
+          arrange(year))
+```
+
+```{r reshape, include=FALSE}
+?pivot_wider
+#Converting data from long to wide
+wide <-gapminder
+
+#wide %>% 
+#      select(country, year,lifeExp) %>% 
+ #     pivot_wider(VarsFrom=year, ValsFrom=lifeExp) #error occurs, to investigate
+```
 
 ## Exploratory Data Analysis
 ### Univariate data analysis
