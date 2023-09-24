@@ -123,7 +123,7 @@ STIData<- STIData %>%
 table(STIData$AgeCat)
 
 
-# Removing numbers from string values
+# Remove numbers and special characters preceding string values
 
 STIData<- STIData %>% 
   dplyr::mutate(A2Occupation = tolower(str_replace(A2Occupation, "\\d", "")),
