@@ -1,11 +1,11 @@
 #PROGRAM  HEADER ---------------------------------------------------------------
-#SCRIPT TITLE           : Cleaning  
+#SCRIPT TITLE           : CleaningSTIData  
 #PROJECT                : R Training
-#TASK                   : Import, Clean and transform STI dataset for analysis
+#TASK                   : Import, Clean and transform the STI dataset for analysis
 #CREATED BY             : Jasper         
 #DATE CREATED           : 02Apr2023                         
-#DATE LAST MODIFIED     : 23 Sept 2023                                                                                                
-#LAST MODIFIED BY       :                                                                                                     
+#DATE LAST MODIFIED     : 24 Sept 2023                                                                                                
+#LAST MODIFIED BY       : Jasper                                                                                                   
 #REASON for MODIFICATION:                                                                                            
 #-------------------------------------------------------------------------------
 
