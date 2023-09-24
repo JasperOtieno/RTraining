@@ -1,7 +1,7 @@
 ---
 title: "Introduction to R Programming"
 author: "By: Jasper Otieno"
-date: "Last updated on 20/Sept/2023"
+date: "Updated on: `r Sys.Date()`"
 output:
   html_document: 
     toc: yes
@@ -772,7 +772,7 @@ The readr package of the tidyverse has functions that enables R users to read an
 `CSV files` are text files that have data/values separated by commas. The `read.csv(csvfilename)` functions from readr reads in the csv file and converts it to a data frame for use in R. The `write.csv` function saves he csv file into the working directory. Run `?read.csv` or `?write.csv` to check for the options allowed for these functions.
 
 
-`Excel` files can include `xls` or `xlsx`. These are files with data arrange in rows and columns. R has the package `readxl` that allows user to read in these files. Use the function `read_excel(excelname)` to read the files. `read_xls()` and `read_xlsx()` also exists for reading excel files. Run `?read_excel` to learn about the options that the function can take.
+`Excel` files can include `xls` or `xlsx`. These are files with data arranged in rows and columns. R has the package `readxl` that allows users to read in these files. Use the function `read_excel(excelname)` to read the files. `read_xls()` and `read_xlsx()` also exists for reading excel files. Run `?read_excel` to learn about the options that the function can take.
 
 ```{r}
 #(df <- read_excel("Dataset/STIData.xls")) #practice data for this training
@@ -879,7 +879,7 @@ names(gapm)
 ```
 
 ```{r reshape, include=FALSE}
-?pivot_wider
+
 #Converting data from long to wide
 wide <-gapminder
 
