@@ -44,10 +44,10 @@ STIData <- STIData %>%
                                 TRUE ~"No sex" #reassign values
                              ))
 
-(missex<-STIData[is.na(STIData$Sexdif),c(1,35,47:49)])
+(missex<-STIData[is.na(STIData$Sexdif),c(1,35,47:49)]) #output those missing sex entry
 
 STIData<- STIData %>% 
-  select(-c(Sex...35,Sex...47,Sexdif))
+  select(-c(Sex...35,Sex...47,Sexdif)) #remove the sex vars after creating clean one
 
 
 # Check for duplicates on subject identifier and rows and clean
@@ -56,7 +56,7 @@ dups <- janitor::get_dupes(STIData) %>%
   select(IdNumber,dupe_count, Date, A1Age, A2Occupation, Weight, Height) # save duplicate rows
 
 (dupID<-janitor::get_dupes(STIData,IdNumber) %>% 
-  select(IdNumber,dupe_count, Date, A1Age, A2Occupation, Weight, Height)) #save duplicates as another dataset
+  select(IdNumber,dupe_count, Date, A1Age, A2Occupation, Weight, Height)) #save rows with duplicate IDs as another dataset
 
 #dups <- STIData[duplicated(STIData$IdNumber), ] analogous to line 58-59
 #sum(duplicated(STIData$IdNumber)) #get total number of duplicates
@@ -84,7 +84,7 @@ STIData$IdNumber <- as.character(STIData$IdNumber)
 #Check Case status and clean
 table(STIData$CaseStatus)
 
-(case3 <- STIData[STIData$CaseStatus == 3, 1:5 ])
+(case3 <- STIData[STIData$CaseStatus == 3, 1:5 ]) #select rows with case=3 and columns 1:5 only
 
 STIData <- STIData %>%
   dplyr::mutate(CaseStatus2= case_when(STIData$CaseStatus==3 & STIData$IdNumber == 31 ~ 1,
