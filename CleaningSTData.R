@@ -34,14 +34,14 @@ unique(STIData$Sex...47)
 STIData <- STIData %>% 
 #check if the two sex vars are exact match and correctly replace if possible
   
-  dplyr::mutate (Sexdif= ifelse(STIData$Sex...35 == STIData$Sex...47, "TRUE", "FALSE"),
+  dplyr::mutate (Sexdif= ifelse(STIData$Sex...35 == STIData$Sex...47, "TRUE", "FALSE"), #check if exact match
                  Sex= case_when(STIData$Sex...47==STIData$Sex...35 ~STIData$Sex...47,
                                 STIData$Sex...35=="Female"& STIData$Sex...47=="Male" ~"Female", #require verification
                                 STIData$Sex...35=="Male"& STIData$Sex...47=="Female" ~"Male", #require verification
                                 STIData$Sex...47=="Male" & is.na(STIData$Sex...35) ~"Male",
                                 STIData$Sex...47=="Female" & is.na(STIData$Sex...35) ~"Female",
                                 is.na(STIData$Sex...47) & STIData$Sex...35=="Male" ~"Male",
-                                TRUE ~"No sex"
+                                TRUE ~"No sex" #reassign values
                              ))
 
 (missex<-STIData[is.na(STIData$Sexdif),c(1,35,47:49)])
@@ -68,7 +68,6 @@ STIData <- STIData %>%
   dplyr::mutate(IdNumber2= case_when(STIData$IdNumber==51 & STIData$A1Age == 23 ~ 227,
                             TRUE~STIData$IdNumber))   
 STIData <- STIData %>% 
-  #dplyr::relocate(IdNumber2, .after = STIData$IdNumber) %>% 
   select(-c(IdNumber)) %>% 
   rename(IdNumber=IdNumber2) %>% 
   relocate(IdNumber, .before = CaseStatus)
@@ -81,13 +80,24 @@ STIData$IdNumber <- as.character(STIData$IdNumber)
 (dupID<-janitor::get_dupes(STIData,IdNumber) %>% 
     select(IdNumber,dupe_count, Date, A1Age, A2Occupation, Weight, Height))
 
-#Check Case status
+
+#Check Case status and clean
 table(STIData$CaseStatus)
 
-case3 <- STIData[STIData$CaseStatus == 3, ]
+(case3 <- STIData[STIData$CaseStatus == 3, 1:5 ])
 
-STIData$CaseStatus[STIData$CaseStatus == 3 & STIData$IdNumber == 31] <- 1
-STIData$CaseStatus[STIData$CaseStatus == 3 & STIData$IdNumber == 1] <- 2
+STIData <- STIData %>%
+  dplyr::mutate(CaseStatus2= case_when(STIData$CaseStatus==3 & STIData$IdNumber == 31 ~ 1,
+                                       STIData$CaseStatus==3 & STIData$IdNumber == 1 ~ 2,
+                                       TRUE~STIData$CaseStatus)) #reassign values
+
+STIData <- STIData %>% 
+  select(-c(CaseStatus)) %>% 
+  rename(CaseStatus=CaseStatus2) %>% 
+  relocate(CaseStatus, .after = IdNumber)
+
+#confirm cleaned status
+table(STIData$CaseStatus)
 
 
 ###########################################################################################
