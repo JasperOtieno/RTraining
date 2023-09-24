@@ -126,7 +126,7 @@ table(STIData$AgeCat)
 # Remove numbers and special characters preceding string values
 
 STIData<- STIData %>% 
-  dplyr::mutate(A2Occupation = tolower(str_replace(A2Occupation, "\\d", "")),
+  dplyr::mutate(A2Occupation = tolower(str_replace(A2Occupation, "\\d", "")), #remove number and change to lowercase
                 A3Church = str_replace(A3Church, "\\d", ""),
                 A4LevelOfEducation = str_replace(A4LevelOfEducation, "\\d", ""),
                 A5MaritalStatus = str_replace(A5MaritalStatus, "\\d", ""),
@@ -138,7 +138,7 @@ STIData<- STIData %>%
                 N12UseCondom = str_replace(N12UseCondom, "\\d", ""),
                 N13TakenAlcohol = str_replace(N13TakenAlcohol, "\\d", ""),
                 Typeofsti = str_replace(Typeofsti, "\\d", ""),
-                N9Relationship = str_replace(N9Relationship, "\\d", ""))
+                N9Relationship = str_replace(N9Relationship, c("\\d"), ""))
 
 
 ###########################################################################################
