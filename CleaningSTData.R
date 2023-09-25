@@ -23,7 +23,7 @@ here,
 babynames
 )
 
-STIData <- read_xls(here("Dataset/STIData.xls"))
+STIData <- read_xls(here("RawData/STIData.xls"))
 names(STIData)
 dim(STIData)
 
@@ -46,7 +46,9 @@ STIData <- STIData %>%
                              )) %>% 
   relocate(Sex, .after=A1Age)
 
-(missex<-STIData[is.na(STIData$Sexdif),c(1,35,47:49)]) #output those missing sex entry
+View(STIData)
+
+(missex<-STIData[is.na(STIData$Sexdif) ,c(1,5,36,48,49)]) #output those missing sex entry
 
 STIData<- STIData %>% 
   select(-c(Sex...35,Sex...47,Sexdif)) #remove the sex vars after creating clean one
@@ -138,9 +140,9 @@ STIData<- STIData %>%
                 N11Usedcondom = str_to_sentence(str_replace(N11Usedcondom, "\\d", "")),
                 N12UseCondom = str_to_sentence(str_replace(N12UseCondom, "\\d", "")),
                 N13TakenAlcohol = str_to_sentence(str_replace(N13TakenAlcohol, "\\d", "")),
-                #Typeofsti = str_trim(str_replace(Typeofsti, c(pattern1="\\d",pattern2="\\)"), "")), #remove leading and trailing white spaces
-                Typeofsti = str_to_upper(str_replace(Typeofsti, c("[^[:alnum:]]"), "")), #remove special characters like ), (,/,\
-                Typeofsti = str_trim(str_replace(Typeofsti, "\\d", "")), #remove leading and trailing white spaces
+                Typeofsti = str_trim(str_replace_all(Typeofsti, "\\d\\W", "")), #remove leading and trailing white spaces,digit and non word characters
+                # Typeofsti = str_replace(Typeofsti, c("[^[:alnum:]]"), ""), #remove special characters like ), (,/,\
+                # Typeofsti = str_trim(str_replace(Typeofsti, "\\d", "")), #remove leading and trailing white spaces, and first digit occurrence
                 N9Relationship = str_to_sentence(str_replace(N9Relationship, "\\d", "")))
 
 # Rename variables 
@@ -150,9 +152,18 @@ STIData<-STIData %>%
                 Church = A3Church,
                 Level_Of_Education = A4LevelOfEducation,
                 Marital_Status=A5MaritalStatus,
+                STI_Yes_No=C3StiYesno,
+                Burial_Society=D1BurialSociety,
+                Religious_Group=D1religiousgrp,
+                Savings_Club=D1savingsClub,
+                Traders_Association=D1tradersAssoc,
                 Group1=D2Group1,
                 Group2=D2Group2,
+                Funeral_Assistance=D3FuneralAssistance,
+                Health_Services=D3HealthServices,
+                Duration_Of_Illness=DurationOfillness,
                 Reason_for_STI=E8WhyhaveSTI,
+                Give_Receive_for_sex=N10givereceiveforsex,
                 Used_Condom=N11Usedcondom,
                 Uses_Condom=N12UseCondom,
                 Taken_Alcohol=N13TakenAlcohol,
@@ -161,10 +172,16 @@ STIData<-STIData %>%
                 Had_An_STI=N3HadAnSti,
                 Do_You_Have=N14DoYouHave,
                 Living_Together=N15LivingTogether,
+                How_Old_Is=N16HowOldIs,
+                Receive_Credit=D3receivecredit,
                 Habitation_Status=HabitationStatus,
-                Age_First_Sex=AgeFirstSex)
+                Age_First_Sex=AgeFirstSex,
+                Alcohol_Use=AlcoholUse,
+                Sex_Partner_1year=SexPartner1year,
+                Sex_Partner_3month=SexPartner3month,
+                Last_Partner_Spouse=LastPartnerSpouse)
 
 #Export Clean data
 
-#write_csv(STIData, "CleanData/STIData_Cleaned.csv")
+write_csv(STIData, "CleanData/STIData_Cleaned.csv", append=FALSE, col_names = TRUE)
 
