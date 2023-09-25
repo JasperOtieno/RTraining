@@ -166,5 +166,5 @@ STIData<-STIData %>%
 
 #Export Clean data
 
-write_csv(STIData, "CleanData/STIData_Cleaned.csv")
+#write_csv(STIData, "CleanData/STIData_Cleaned.csv")
 
