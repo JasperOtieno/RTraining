@@ -127,7 +127,7 @@ table(STIData$AgeCat)
 # Remove numbers and special characters preceding string values
 
 STIData<- STIData %>% 
-  dplyr::mutate(A2Occupation = str_to_sentence(str_replace(A2Occupation, "\\d", "")), #remove number and change to lowercase
+  dplyr::mutate(A2Occupation = str_to_sentence(str_replace(A2Occupation, "\\d", "")), #remove number and change to sentence format
                 A3Church = str_to_title(str_replace(A3Church, "\\d", "")),
                 A4LevelOfEducation = str_to_sentence(str_replace(A4LevelOfEducation, "\\d", "")),
                 A5MaritalStatus = str_to_sentence(str_replace(A5MaritalStatus, "\\d", "")),
@@ -138,22 +138,33 @@ STIData<- STIData %>%
                 N11Usedcondom = str_to_sentence(str_replace(N11Usedcondom, "\\d", "")),
                 N12UseCondom = str_to_sentence(str_replace(N12UseCondom, "\\d", "")),
                 N13TakenAlcohol = str_to_sentence(str_replace(N13TakenAlcohol, "\\d", "")),
+                #Typeofsti = str_trim(str_replace(Typeofsti, c(pattern1="\\d",pattern2="\\)"), "")), #remove leading and trailing white spaces
                 Typeofsti = str_to_upper(str_replace(Typeofsti, c("[^[:alnum:]]"), "")), #remove special characters like ), (,/,\
-                Typeofsti = str_trim(str_replace(Typeofsti, "\\d", "")),
+                Typeofsti = str_trim(str_replace(Typeofsti, "\\d", "")), #remove leading and trailing white spaces
                 N9Relationship = str_to_sentence(str_replace(N9Relationship, "\\d", "")))
 
-
-###########################################################################################
-
 # Rename variables 
-# STIData2 <- 
-#   STIData1 %>% 
-#   dplyr::rename(CaseStatus = CaseStatus1,
-#                 ID = IdNumber,
-#                 Sex = Sex...47,
-#                 Age = A1Age,
-#                 Occupation = A2Occupation,
-#                 Church = A3Church,
-#                 `Level Of Education` = A4LevelOfEducation)
+STIData<-STIData %>%
+  dplyr::rename(Age = A1Age,
+                Occupation = A2Occupation,
+                Church = A3Church,
+                Level_Of_Education = A4LevelOfEducation,
+                Marital_Status=A5MaritalStatus,
+                Group1=D2Group1,
+                Group2=D2Group2,
+                Reason_for_STI=E8WhyhaveSTI,
+                Used_Condom=N11Usedcondom,
+                Uses_Condom=N12UseCondom,
+                Taken_Alcohol=N13TakenAlcohol,
+                Type_of_STI=Typeofsti,
+                Relationship=N9Relationship,
+                Had_An_STI=N3HadAnSti,
+                Do_You_Have=N14DoYouHave,
+                Living_Together=N15LivingTogether,
+                Habitation_Status=HabitationStatus,
+                Age_First_Sex=AgeFirstSex)
 
+#Export Clean data
+
+write_csv(STIData, "CleanData/STIData_Cleaned.csv")
 
