@@ -19,7 +19,8 @@ inspectdf,
 plotly,
 janitor,
 esquisse,
-here
+here,
+babynames
 )
 
 STIData <- read_xls(here("Dataset/STIData.xls"))
@@ -126,19 +127,20 @@ table(STIData$AgeCat)
 # Remove numbers and special characters preceding string values
 
 STIData<- STIData %>% 
-  dplyr::mutate(A2Occupation = tolower(str_replace(A2Occupation, "\\d", "")), #remove number and change to lowercase
-                A3Church = str_replace(A3Church, "\\d", ""),
-                A4LevelOfEducation = str_replace(A4LevelOfEducation, "\\d", ""),
-                A5MaritalStatus = str_replace(A5MaritalStatus, "\\d", ""),
-                D2Group1 = str_replace(D2Group1, "\\d", ""),
-                D2Group2 = str_replace(D2Group2, "\\d", ""),
-                E8WhyhaveSTI = str_replace(E8WhyhaveSTI, "\\d", ""),
-                N10givereceiveforsex = str_replace(N10givereceiveforsex, "\\d", ""),
-                N11Usedcondom = str_replace(N11Usedcondom, "\\d", ""),
-                N12UseCondom = str_replace(N12UseCondom, "\\d", ""),
-                N13TakenAlcohol = str_replace(N13TakenAlcohol, "\\d", ""),
-                Typeofsti = str_replace(Typeofsti, "\\d", ""),
-                N9Relationship = str_replace(N9Relationship, c("\\d"), ""))
+  dplyr::mutate(A2Occupation = str_to_sentence(str_replace(A2Occupation, "\\d", "")), #remove number and change to lowercase
+                A3Church = str_to_title(str_replace(A3Church, "\\d", "")),
+                A4LevelOfEducation = str_to_sentence(str_replace(A4LevelOfEducation, "\\d", "")),
+                A5MaritalStatus = str_to_sentence(str_replace(A5MaritalStatus, "\\d", "")),
+                D2Group1 = str_to_sentence(str_replace(D2Group1, "\\d", "")),
+                D2Group2 = str_to_sentence(str_replace(D2Group2, "\\d", "")),
+                E8WhyhaveSTI = str_to_sentence(str_replace(E8WhyhaveSTI, "\\d", "")),
+                N10givereceiveforsex = str_to_sentence(str_replace(N10givereceiveforsex, "\\d", "")),
+                N11Usedcondom = str_to_sentence(str_replace(N11Usedcondom, "\\d", "")),
+                N12UseCondom = str_to_sentence(str_replace(N12UseCondom, "\\d", "")),
+                N13TakenAlcohol = str_to_sentence(str_replace(N13TakenAlcohol, "\\d", "")),
+                Typeofsti = str_to_upper(str_replace(Typeofsti, c("[^[:alnum:]]"), "")), #remove special characters like ), (,/,\
+                Typeofsti = str_trim(str_replace(Typeofsti, "\\d", "")),
+                N9Relationship = str_to_sentence(str_replace(N9Relationship, "\\d", "")))
 
 
 ###########################################################################################
