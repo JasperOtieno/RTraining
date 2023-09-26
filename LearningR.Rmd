@@ -256,7 +256,7 @@ summary(mtx2)
 apply(mtx3,2,mean) #calculating mean of each column, 2 means columns
 
 apply(mtx3,1,mean) #calculating mean of each row, 1 means rows
-apply(mtx3,1,sum) #calculating sum of each row, 1 means rows
+apply(mtx3,1,sum) #calculating sum of each row, 1 means rows, can use rowSums or colSums functions as well.
 
 apply (mtx3,1,function(x)mean(x[x>0])) #mean of rows of only positive numbers
 

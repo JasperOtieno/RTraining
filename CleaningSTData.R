@@ -15,6 +15,8 @@ if(!require(pacman))install.packages("pacman")
 pacman::p_load(
 tidyverse,
 readxl,
+writexl,
+table1,
 inspectdf,
 plotly,
 janitor,
@@ -182,6 +184,7 @@ STIData<-STIData %>%
                 Last_Partner_Spouse=LastPartnerSpouse)
 
 #Export Clean data
+# write_csv(STIData, "CleanData/STIData_Cleaned.csv", append=FALSE, col_names = TRUE)
 
-write_csv(STIData, "CleanData/STIData_Cleaned.csv", append=FALSE, col_names = TRUE)
+writexl::write_xlsx(STIData, "CleanData/STIData_Cleaned.xlsx")
 
