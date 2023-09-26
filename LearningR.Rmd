@@ -705,7 +705,8 @@ Hoodie(26)
 R provides a wide range of packages that enable users to perform specific tasks efficiently in R environment. An R package is a collection of functions and can be downloaded from CRAN (Comprehensive R Archive Network). CRAN is the repository for R packages. Some packages already exist in the R environment but some of them must be installed first before they can used. Some packages exists together in an ecosystem of packages for specific tasks. For example the tydyverse package is an ecosystem of packages that enable users clean data, produce graphs and charts, transform data, import data and handle dates
 
 ### Installing and loading a package
-Installing an R package is very simple. The function `install.packages("packagename")`is used. This makes the package available for access to RStudio but cannot be used yet. One has to load the package into R environment to be able use it and this is done using the function `library(packagename)`. Some packages can exist in more than one ecosystem and one might wish to explicitly indicate the ecosystem from which the package is from by using using double colons as `ecosystemname::packagename`. One has to have an internet connection to be able install packages.
+Installing an R package is very simple. The function `install.packages("packagename")`is used. This makes the package available for access to RStudio but cannot be used yet. One has to load the package into R environment to be able use it and this is done using the function `library(packagename)`. Some packages can exist in more than one ecosystem and one might wish to explicitly indicate the ecosystem from which the package is from by using using double colons as `ecosystemname::packagename`. One has to have an internet connection to be able install packages. The pacman function can be handy in loading packages at once.
+`if(!require(pacman))install.packages("pacman") pacman::p_load(insertpackageshere)`
 
 Below are examples of packages commonly used.
 
@@ -856,9 +857,6 @@ df %>%  select(1:5) #selecting variables in position 1 to 5
 #### Handling Missing data
 #### Handling dates and times
 #### Handling strings
-#### Handling dupicates
-#### Handling factor variables
-
 #### Restructuring data
 Load gapminder dataset
 
@@ -889,7 +887,48 @@ wide <-gapminder
 ```
 
 ## Exploratory Data Analysis
+Exploratory Data Analysis is about understanding your data to know the pattern of data and relationship between variables. This can help suggest modeling strategy or help policy makers make data driven policies. EDA largely look for central tendencies or measures of spread. Types of graphs include box plot,density plot and pie charts.
+
 ### Univariate data analysis
+Analysis of single variable.
+
+```{r}
+library(readxl)
+xlsxd<-read_xlsx("CleanData/STIData_Cleaned.xlsx")
+View(xlsxd)
+summary(xlsxd)
+```
+
+Looking at numeric variables(some continuous variables) , weight and height
+
+Measure of spread of weight across the population
+```{r}
+#spread of weight across the population
+
+summary(xlsxd$Weight) #spread of weight across the population
+boxplot(xlsxd$Weight)
+hist(xlsxd$Weight)
+plot(density(xlsxd$Weight), main="Weight Spread")
+```
+
+Measure of spread of height across the population
+```{r}
+summary(xlsxd$Height) #spread of weight across the population
+boxplot(xlsxd$Height)
+hist(xlsxd$Height)
+plot(density(xlsxd$Height, na.rm=T),main="Height Spread")
+```
+
+Measure of spread of age across the population
+```{r}
+#spread of Age across the population
+summary(xlsxd$Age) #spread of weight across the population
+boxplot(xlsxd$Age)
+hist(xlsxd$Age)
+plot(density(xlsxd$Age, na.rm=T),main="Age Spread")
+```
+
+
 ### Multivariate Data analysis
 
 ## Data Visualisation
