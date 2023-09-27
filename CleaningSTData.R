@@ -10,25 +10,25 @@
 #-------------------------------------------------------------------------------
 
 # Load necessary package and Importing data
-if(!require(pacman))install.packages("pacman")
-
-pacman::p_load(
-tidyverse,
-readxl,
-writexl,
-table1,
-inspectdf,
-plotly,
-janitor,
-esquisse,
-here,
-babynames,
-arsenal
-)
+# if(!require(pacman))install.packages("pacman")
+# 
+# pacman::p_load(
+# tidyverse,
+# readxl,
+# writexl,
+# table1,
+# inspectdf,
+# plotly,
+# janitor,
+# esquisse,
+# here,
+# babynames,
+# arsenal
+# )
 
 STIData <- read_xls(here("RawData/STIData.xls"))
-names(STIData)
-dim(STIData)
+#names(STIData)
+#dim(STIData)
 
 #Clean the sex variable: two vars with some different values
 
@@ -49,7 +49,7 @@ STIData <- STIData %>%
                              )) %>% 
   relocate(Sex, .after=A1Age)
 
-View(STIData)
+#View(STIData)
 
 (missex<-STIData[is.na(STIData$Sexdif) ,c(1,5,36,48,49)]) #output those missing sex entry
 
@@ -95,7 +95,7 @@ table(STIData$CaseStatus)
 STIData <- STIData %>%
   dplyr::mutate(CaseStatus2= case_when(STIData$CaseStatus==3 & STIData$IdNumber == 31 ~ 1,
                                        STIData$CaseStatus==3 & STIData$IdNumber == 1 ~ 2,
-                                       TRUE~STIData$CaseStatus)) %>% #reassing values
+                                       TRUE~STIData$CaseStatus)) %>% #re-assigning values
           select(-c(CaseStatus)) %>% 
           rename(CaseStatus=CaseStatus2) %>% 
           relocate(CaseStatus, .after = IdNumber)
