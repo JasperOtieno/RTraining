@@ -855,7 +855,7 @@ df %>%  select(1:5) #selecting variables in position 1 to 5
 ```
 
 #### Handling Missing data
-#### Handling dates and times
+#### Handling dates and times %>% 
 #### Handling strings
 #### Restructuring data
 Load gapminder dataset

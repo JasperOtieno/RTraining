@@ -22,7 +22,8 @@ plotly,
 janitor,
 esquisse,
 here,
-babynames
+babynames,
+arsenal
 )
 
 STIData <- read_xls(here("RawData/STIData.xls"))
@@ -188,3 +189,4 @@ STIData<-STIData %>%
 
 writexl::write_xlsx(STIData, "CleanData/STIData_Cleaned.xlsx")
 
+ 
