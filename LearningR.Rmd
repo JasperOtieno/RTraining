@@ -422,7 +422,7 @@ Arrays cannot be used to perform calculations but to store multiple matrices.
 #### Creating an array
 ```{r}
 v1 =c(1:12)
-(m1 = matrix(v1, nrow=3, ncol=4, byrow=TRUE))
+(m1 = matrix(v1, nrow=3, ncol=4, byrow=TRUE)) #create matrix 1
 
 v2 = c(25:36)
 (m2 = matrix(v2, nrow=3, ncol=4, byrow=TRUE))
