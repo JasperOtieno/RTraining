@@ -10,21 +10,21 @@
 #-------------------------------------------------------------------------------
 
 # Load necessary package and Importing data
-# if(!require(pacman))install.packages("pacman")
-# 
-# pacman::p_load(
-# tidyverse,
-# readxl,
-# writexl,
-# table1,
-# inspectdf,
-# plotly,
-# janitor,
-# esquisse,
-# here,
-# babynames,
-# arsenal
-# )
+if(!require(pacman))install.packages("pacman")
+
+pacman::p_load(
+tidyverse,
+readxl,
+writexl,
+table1,
+inspectdf,
+plotly,
+janitor,
+esquisse,
+here,
+babynames,
+arsenal
+)
 
 STIData <- read_xls(here("RawData/STIData.xls"))
 #names(STIData)
@@ -84,10 +84,10 @@ STIData$IdNumber <- as.character(STIData$IdNumber)
 
 #Confirm no ID duplicates
 (dupID<-janitor::get_dupes(STIData,IdNumber) %>% 
-    select(IdNumber,dupe_count, Date, A1Age, A2Occupation, Weight, Height))
+    select(IdNumber,dupe_count, Date, A1Age, Sex, Weight, Height))
 
 
-#Check Case status and clean
+#Check CaseStatus and clean
 table(STIData$CaseStatus)
 
 (case3 <- STIData[STIData$CaseStatus == 3, 1:5 ]) #select rows with case=3 and columns 1:5 only
