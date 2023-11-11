@@ -16,7 +16,7 @@ pacman::p_load(
 tidyverse,
 readxl,
 writexl,
-table1,
+table1,  
 inspectdf,
 plotly,
 janitor,

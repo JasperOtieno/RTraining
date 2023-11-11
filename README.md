@@ -27,6 +27,7 @@ Describes analysis of univariate and multivariate data
 Section describes how to visualize data using different methods
 
 ## 9. R Shiny
+Section describes how to create interactive dashboard using the RShiny application
 
 
 

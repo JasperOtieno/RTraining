@@ -20,7 +20,7 @@ This is an introduction to R programming with end goal of learning the basics of
 # BASIC R PROGRAMMING
 
 ## DATA TYPES
-R stores data in different types or classes. There are about 4 classes/types of data that R can store. To check the kind of class of data you are working with, use the function `class()` and use the function `typeof()` to check the type of data.
+R stores data in different types or classes. There are about 4 classes/types of data that R can store. To check the kind of class of data you are working with, use the function `class(x)` and use the function `typeof(x)` where x is the object usually the variable to check the type of data.
 
 ### Character
 Refers to data in form of letters, sentences or numbers formatted to texts/strings e.g, names of people (James, rose), letter A, B, or colours, green, blue. They must always be wrapped in double quotation marks when referenced.
@@ -44,6 +44,7 @@ typeof(numeric1)
 
 ### Integers
 Are numeric data in form of whole numbers. They are denoted by letter L next to them.
+
 ```{r}
 (numeric2 <- c(1L, 2L, 3L, 4L, 5L)) #integer (whole numbers)
 
